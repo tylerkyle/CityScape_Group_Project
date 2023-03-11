@@ -1,0 +1,50 @@
+@charset "ISO-8859-1";
+
+h1{
+	background-color:green;
+	
+	
+	
+}
+
+.bodyContainer{
+	display: flex;
+	flex-direction: column;
+	border: solid, black;
+	align-items:center;
+	
+	margin: 2.5%; 
+	padding: 2.5%;
+	
+};
+
+.loginSignUpContainer{
+	
+	margin: 2.5%; 
+	padding: 2.5%;
+		width: 80%;
+	height:33%;
+	}
+.inputsContainer{
+	display:flex;
+	
+	align-items:center;
+	
+	margin: 2.5%; 
+	padding: 2.5%;
+}
+.inputContainer{
+	display:flex;
+
+	align-items:center;
+	
+	margin: 2.5%; 
+	padding: 2.5%;
+}
+
+.loginContainer{
+	
+	margin: 2.5%; 
+	padding: 2.5%;
+}
+
