@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,6 +30,10 @@ public class Hunt {
         joinColumns = @JoinColumn(name = "lease_id"),
         inverseJoinColumns = @JoinColumn(name = "hunt_id"))
     private List <Hunt> hunts;
+	
+	@ManyToOne
+    @JoinColumn(name="leaseeId", nullable=false, insertable = false, updatable = false)
+    private User user;
 
 	
     @Size(min = 0, max = 100000)

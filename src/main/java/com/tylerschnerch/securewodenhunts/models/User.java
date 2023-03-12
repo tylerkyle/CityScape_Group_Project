@@ -57,6 +57,9 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "lease_id"))
     private List <Lease> leases;
     
+    @OneToMany(mappedBy="id")
+    private List<Hunt> hunts;
+    
     public User() {
     }
     public Long getId() {

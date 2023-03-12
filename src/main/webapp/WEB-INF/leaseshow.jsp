@@ -60,7 +60,7 @@
 	<c:if test="${userId != thisLease.usersId}">
 		<div class="bookHuntContainer">	
 				<div class="formContainer">
-				<form:form action="/hunt/review" method="post" modelAttribute="newHunt">
+				<form:form action="/hunt/submit" method="post" modelAttribute="newHunt">
 					<div class="inputContainer">
 						
 						<div class="leaseeIdcontainer">

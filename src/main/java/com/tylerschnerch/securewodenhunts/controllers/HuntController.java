@@ -38,7 +38,7 @@ public class HuntController {
 			System.out.println("C");
 			huntService.createHunt(hunt);
 			System.out.println("D");
-			return "redirect:/review/";
+			return "redirect:/review";
 			}
 	
 		}
