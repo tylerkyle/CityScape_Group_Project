@@ -1,20 +1,23 @@
 package com.tylerschnerch.securewodenhunts.models;
 
+import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
+
+
 
 @Entity
 @Table(name="hunts")
@@ -22,100 +25,158 @@ public class Hunt {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@OneToMany
-    @JoinTable(
-    	name = "leases_hunts",
-        joinColumns = @JoinColumn(name = "lease_id"),
-        inverseJoinColumns = @JoinColumn(name = "hunt_id"))
-    private List <Hunt> hunts;
-	
-	@ManyToOne
-    @JoinColumn(name="leaseeId", nullable=false, insertable = false, updatable = false)
-    private User user;
+	private Integer id;
 
+	@Range(min = 0, max = 100000)
+    private Double total;
 	
-    @Size(min = 0, max = 100000)
-    private String total;
 	
+    @Range(min = 0, max = 100000)
+    private Double tax;
 	
-    @Size(min = 0, max = 100000)
-    private String tax;
-	
-	@NotNull
-	private int leaseeId;
 	
 	@NotNull
 	private int leaseorId;
 	
 	@NotNull
-	@Size(min = 0, max = 100000)
-	private  String startDate;
+	private  Date startDate;
 	
 	@NotNull
-	@Size(min = 0, max = 100000)
-	private  String endDate;
+	private  Date endDate;
+	
+	@Range(min=0, max = 100000)
+	private Long totalDays;
+	
+	@Range(min = 0,max = 1000)
+	private Double rate;
 	
 	@NotNull
 	private  boolean confirmed;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="lease_id")
-	private Lease lease;
 	
-	private String serviceFee;
 	
+	private Double serviceFee;
+	
+	private Double grandTotal;
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	 @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+		@JoinColumn(name="lease_id")
+		private Lease lease;
+	
+
+
+	
+
+	
+
+	public Lease getLease() {
+		return lease;
+	}
+
+	public void setLease(Lease lease) {
+		this.lease = lease;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	//Pojo
+	public Hunt() {}
+	
+	public Double getGrandTotal() {
+		return grandTotal;
+	}
+
+	
+
+
+
+
+
+	public void setGrandTotal(Double grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+
+
+
+
+
+
+
+	public void setServiceFee(Double serviceFee) {
+		this.serviceFee = serviceFee;
+	}
+
+
+
+
+
+
+
 	public boolean isConfirmed() {
 		return confirmed;
 	}
 
 
+	
+	public Double getRate() {
+		return rate;
+	}
 
 
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+	
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public Double getTax() {
+		return tax;
+	}
+
+	public void setTax(Double tax) {
+		this.tax = tax;
+	}
+
+	public Double getServiceFee() {
+		return serviceFee;
+	}
+
+	
 	public void setConfirmed(boolean confirmed) {
 		this.confirmed = confirmed;
 	}
 
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
 
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
-
-	public List<Hunt> getHunts() {
-		return hunts;
-	}
-
-
-
-
-	public void setHunts(List<Hunt> hunts) {
-		this.hunts = hunts;
-	}
-
-
-
-
-	public int getLeaseeId() {
-		return leaseeId;
-	}
-
-
-
-
-	public void setLeaseeId(int leaseeId) {
-		this.leaseeId = leaseeId;
-	}
 
 
 
@@ -134,73 +195,48 @@ public class Hunt {
 
 
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
+	}
+	
+
+
+
+
+	public Long getTotalDays() {
+		return totalDays;
 	}
 
 
 
 
-	public void setStartDate(String startDate) {
+	public void setTotalDays(Long totalDays) {
+		this.totalDays = totalDays;
+	}
+
+
+
+
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
 
 
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
 
 
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
 
 
 
-	public Lease getLease() {
-		return lease;
-	}
-
-
-
-
-	public void setLease(Lease lease) {
-		this.lease = lease;
-	}
-
-
-	//Pojo
-	public Hunt() {}
 	
-	
-	
-	
-	public String getTotal() {
-		return total;
-	}
-
-	public void setTotal(String total) {
-		this.total = total;
-	}
-
-	public String getTax() {
-		return tax;
-	}
-
-	public void setTax(String tax) {
-		this.tax = tax;
-	}
-
-	public String getServiceFee() {
-		return serviceFee;
-	}
-
-	public void setServiceFee(String serviceFee) {
-		this.serviceFee = serviceFee;
-	}
 }

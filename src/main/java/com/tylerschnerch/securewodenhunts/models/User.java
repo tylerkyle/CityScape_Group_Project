@@ -3,6 +3,7 @@ package com.tylerschnerch.securewodenhunts.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Range;
+
 
 @Entity
 @Table(name="users")
@@ -25,7 +26,7 @@ public class User {
 	
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     
     @Size(min=3)
     private String username;
@@ -33,7 +34,7 @@ public class User {
     @Size(min=3, max = 100)
     private String email; 
     
-    @Range(min=5, max=10)
+    @Size(min=4, max=10)
     private String zipcode;
     
     @Size(min=5)
@@ -50,22 +51,20 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List <Role> roles;
     
-    @OneToMany
-    @JoinTable(
-    	name = "users_leases",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "lease_id"))
-    private List <Lease> leases;
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Lease> leases;
     
-    @OneToMany(mappedBy="id")
-    private List<Hunt> hunts;
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+   	private List<Hunt> hunts;
+        
     
-    public User() {
+	public User() {
     }
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+  
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getUsername() {

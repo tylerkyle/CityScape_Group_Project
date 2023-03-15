@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.tylerschnerch.securewodenhunts.models.Hunt;
+
 import com.tylerschnerch.securewodenhunts.repositories.HuntRepository;
 @Service
 public class HuntService {
@@ -27,7 +28,7 @@ public class HuntService {
 		    }
 		    
 		    // retrieves a hunt
-		    public Hunt findHunt(Long id) {
+		    public Hunt findHunt(Integer id) {
 		        Optional<Hunt> optionalHunt= huntRepository.findById(id);
 		        if(optionalHunt.isPresent()) {
 		            return optionalHunt.get();
@@ -40,8 +41,12 @@ public class HuntService {
 		    	return huntRepository.save(hunt);
 		    }
 		    
-		    public void  deleteLease(Long id) {
+		    public void  deleteLease(Integer id) {
 		    	huntRepository.deleteById(id);
+		    }
+		    public List<Hunt> allOfAUsersHunts(Integer id) {
+		        
+		    	return huntRepository.findByUserId(id);
 		    }
 
 }

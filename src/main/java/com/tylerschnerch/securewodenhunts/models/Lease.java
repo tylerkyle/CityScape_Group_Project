@@ -1,17 +1,19 @@
 package com.tylerschnerch.securewodenhunts.models;
 
 import java.util.Date;
+import java.util.List;
 
-
-
+import javax.persistence.CascadeType;
 //import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -22,13 +24,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 
+
 @Entity
 @Table(name="leases")
 public class Lease{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long usersId;
+    private Integer id;
+    private Integer usersId;
     private String stands;
     private  String acres;
    	//Need to increase validations
@@ -45,7 +48,38 @@ public class Lease{
     private String title;
 	private String game;
     private String zipcode;
-	private String rate;
+	
+
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	public List<Hunt> getHunts() {
+		return hunts;
+	}
+
+
+	public void setHunts(List<Hunt> hunts) {
+		this.hunts = hunts;
+	}
+	private Double rate;
 	private String description;
     private String blinds;
     private String accessPoints;
@@ -56,60 +90,21 @@ public class Lease{
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
     
-    public Lease() {}
-	public Lease(
-			String title, 
-			Long id, 
-			String zipcode,
-			User user, 
-			String description, 
-			String acres, 
-			String monday,
-			String accessPoints,
-			String blinds,
-			String stands,
-			String tuesday, 
-			String wednesday, 
-			String thursday, 
-			String friday, 
-			String saturday, 
-			String  sunday, 
-			String morningBooking, 
-			String eveningBooking, 
-			String termsofService, 
-			String publishListing,
-			String game, 
-			String rate,
-			Long usersId){
-        this.id = id;
-        this.title = title;
-        this.blinds = blinds;
-        this.stands= stands;
-        this.description = description;
-        this.accessPoints = accessPoints;
-        this.game = game;
-        this.zipcode = zipcode;
-        this.acres = acres;
-        this.monday = monday;
-        this.tuesday = tuesday;
-        this.wednesday = wednesday;
-        this.thursday = thursday;
-        this.friday = friday;
-        this.saturday = saturday;
-        this.sunday = sunday;
-        this.morningBooking = morningBooking;
-        this.eveningBooking = eveningBooking;
-        this.termsofService = termsofService;
-        this.rate = rate;
-        //the leaseor id
-        this.usersId = usersId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private User user;
+    
+    @OneToMany(mappedBy="lease", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+   	private List<Hunt> hunts;
+    
 
+	public Lease() {}
 	
-	public Long getUsersId() {
+	
+	public Integer getUsersId() {
 		return usersId;
 	}
-	public void setUsersId(Long usersId) {
+	public void setUsersId(Integer usersId) {
 		this.usersId = usersId;
 	}
 	public Date getUpdatedAt() {
@@ -119,10 +114,10 @@ public class Lease{
 		this.updatedAt = updatedAt;
 	}
 	/////Getter and setters////
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -211,16 +206,11 @@ public class Lease{
 	public void setGame(String game) {
 		this.game = game;
 	}
-	public String getZipcode() {
-		return zipcode;
-	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-	public String getRate() {
+	
+	public Double getRate() {
 		return rate;
 	}
-	public void setRate(String rate) {
+	public void setRate(Double rate) {
 		this.rate = rate;
 	}
 	public String getDescription() {

@@ -1,6 +1,7 @@
 package com.tylerschnerch.securewodenhunts.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,14 @@ public class UserService {
 	//    }
 
 	// }
+	
+	 public Optional<User> findById(Integer id) {
+	    	Optional<Optional<User>> possibleUser = Optional.of(userRepository.findById(id));
+	    	if (possibleUser.isPresent()) {
+	    		return possibleUser.get();
+	    	}
+	    	return null;
+	    }
 
 	public void newUser(User user, String role) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -66,7 +75,7 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public void deleteUser(Long id) {
+	public void deleteUser(Integer id) {
 		userRepository.deleteById(id);
 	}
 }

@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.tylerschnerch.securewodenhunts.models.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Integer> {
     User findByUsername(String username);
-    Optional<User> findById(Long id);
+    
+    Optional<User> findById(Integer id);
     
     List<User> findAll();
+    
 }

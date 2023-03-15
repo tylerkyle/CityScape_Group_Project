@@ -34,7 +34,7 @@ public class HomeController {
 		model.addAttribute("user", userService.findByUsername(username));
 		User user = userService.findByUsername(username);
 		if (session.getAttribute("userId") == null){
-			Long thisUsersId =  user.getId();
+			Integer thisUsersId =  user.getId();
 			session.setAttribute("userId", thisUsersId);
 			
 		}

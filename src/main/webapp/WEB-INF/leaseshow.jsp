@@ -60,17 +60,17 @@
 	<c:if test="${userId != thisLease.usersId}">
 		<div class="bookHuntContainer">	
 				<div class="formContainer">
-				<form:form action="/hunt/submit" method="post" modelAttribute="newHunt">
+				<form:form action="/hunt/submit/${thisLease.id}" method="post" modelAttribute="newHunt">
 					<div class="inputContainer">
 						
 						<div class="leaseeIdcontainer">
-							<form:errors path="leaseeId" class="test-danger"/>
-							<form:input path="leaseeId" type="hidden" value="${userId}"/>
+							<form:errors path="user" class="test-danger"/>
+							<form:input path="user" type="hidden" value="${userId}"/>
 						</div>
 						
 						<div class="leaseorIdcontainer">
 							<form:errors path="leaseorId" class="test-danger"/>
-							<form:input path="leaseorId" type="hidden" value="${thisLease.usersId}"/>
+							<form:input path="leaseorId" type="hidden" value="${thisLease.user.id}"/>
 						</div>
 						
 						<div class="startDate">
@@ -78,6 +78,7 @@
 							<form:errors path="startDate" class="test-danger"/>
 							<form:input path="startDate" type="date"/>
 						</div>
+						
 						
 						<div class="endDate">
 							<form:label path="endDate">End date:</form:label>
@@ -89,6 +90,12 @@
 							
 							<form:errors path="confirmed" class="test-danger"/>
 							<form:input path="confirmed" type="hidden" value="false"/>
+						</div>
+						
+						<div class="rateContainer">
+							
+							<form:errors path="rate" class="test-danger"/>
+							<form:input path="rate" type="hidden" value="${thisLease.rate} "/>
 						</div>
 					
 						<div class="submitButton">

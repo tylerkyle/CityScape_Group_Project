@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,23 +48,38 @@ public class LeaseController {
 
 			@GetMapping("/{id}")
 			public String thisLease(@ModelAttribute("newHunt") Hunt hunt,
-					@PathVariable("id") Long id, Model model,
+					@PathVariable("id") Integer id, Model model,
 					HttpSession session, Principal principal) {
 				if(session.getAttribute("userId") == null) {
 		    		return "redirect:/";
 				}
-				String username = principal.getName();
+				System.out.println("Good one");
+				//Integer userId =(Integer) session.getAttribute("userId");
+				//String username = principal.getName();
 				Lease lease = leaseService.findLease(id);
+				System.out.println("Good two");
 				model.addAttribute("thisLease", lease);
-				model.addAttribute("user", userService.findByUsername(username));
+				System.out.println("Good three");
+				//User thisUser = userService.findById(userId);
+				Integer userId = (Integer) session.getAttribute("userId");
+				System.out.println("Good four");
+				Long longUserId = userId.longValue(); 
+				System.out.println("Good five");
+				model.addAttribute("userId",longUserId);
+				String username = principal.getName();
+				User user = userService.findByUsername(username); 
+				model.addAttribute("user", user);
+				System.out.println("Good six");
+				//System.out.println(thisUser.getId());
 				//We need an empty hunt here so we can bind the the hunt to the result in the create hunt method
 				model.addAttribute("thisHunt", hunt);
+				System.out.println("Good seven");
 				return "leaseshow.jsp";
 			}
 
 			@RequestMapping("/{id}/edit")
-			public String editThisLease(@PathVariable("id") Long id, Model model, HttpSession session, Object sessionId, Long leasesUserId) {
-				sessionId = (Long) session.getAttribute("userId");
+			public String editThisLease(@PathVariable("id") Integer id, Model model, HttpSession session, Object sessionId, Integer leasesUserId) {
+				sessionId =  session.getAttribute("userId");
 				System.out.println(sessionId);
 				//session check
 				if (session.getAttribute("userId") == null) {
@@ -73,7 +89,7 @@ public class LeaseController {
 				
 				Lease lease = leaseService.findLease(id);
 				model.addAttribute("thisLease", lease);
-				leasesUserId = (Long) lease.getUsersId();
+				leasesUserId =  lease.getUsersId();
 				
 				System.out.println(leasesUserId);
 
@@ -103,7 +119,8 @@ public class LeaseController {
 				}
 				
 				username = principal.getName();
-				Long userId = (Long) session.getAttribute("userId");
+				Integer userId = (Integer) session.getAttribute("userId");
+				Long userIdLong = userId.longValue();
 				//String username = principal.getName();
 				//WNTLOCB: the user needs to be able to see their leases we will get these leases by their id
 				//User user =  userService.findByUsername(username);
@@ -142,6 +159,10 @@ public class LeaseController {
 				}
 
 				if (result.hasErrors()) {
+					List<FieldError> errors = result.getFieldErrors();
+				    for (FieldError error : errors ) {
+				        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+				    }
 					System.out.println("A");
 					return "redirect:/lease/new";
 
@@ -169,7 +190,7 @@ public class LeaseController {
 		}
 
 	@PostMapping("/delete/{id}")
-		public String deleteLease(@PathVariable("id") Long id, HttpSession session) {
+		public String deleteLease(@PathVariable("id") Integer id, HttpSession session) {
 
 			if (session.getAttribute("userId") == null) {
 				return "redirect:/logout";

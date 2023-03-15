@@ -43,7 +43,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/{id}")
-	public String adminDelete(@PathVariable("id") Long id, Principal principal, Model model) {
+	public String adminDelete(@PathVariable("id") Integer id, Principal principal, Model model) {
 		userService.deleteUser(id);
 		return "redirect:/admin/admin";
 	}

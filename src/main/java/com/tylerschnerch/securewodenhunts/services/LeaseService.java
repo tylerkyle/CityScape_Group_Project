@@ -24,23 +24,23 @@ import com.tylerschnerch.securewodenhunts.repositories.LeaseRepository;
 	    }
 	    
 	 // returns all the leases sorting by the users id
-	    public List<Lease> allUserLeasesById(Long id) {
-	        return leaseRepository.findByusersId(id);
+	    public List<Lease> allUserLeasesById(Integer id) {
+	        return leaseRepository.findByUsersId(id);
 	    }
 	    
 		 // returns all the leases sorting by the users zip
 	    public List<Lease> allZipsLeases(String zip) {
 	        
-	    	return leaseRepository.findByzipcode(zip);
+	    	return leaseRepository.findByZipcode(zip);
 	    }
 	    
 	    // creates a lease
 	    public Lease createLease(Lease l) {
-	        return leaseRepository.save(l);
+	        return leaseRepository. save(l);
 	    }
 	    
 	    // retrieves a lease
-	    public Lease findLease(Long id) {
+	    public Lease findLease(Integer id) {
 	        Optional<Lease> optionalLease= leaseRepository.findById(id);
 	        if(optionalLease.isPresent()) {
 	            return optionalLease.get();
@@ -54,7 +54,7 @@ import com.tylerschnerch.securewodenhunts.repositories.LeaseRepository;
 	    	return leaseRepository.save(lease);
 	    }
 	    
-	    public void  deleteLease(Long id) {
+	    public void  deleteLease(Integer id) {
 	    	leaseRepository.deleteById(id);
 	    }
 		

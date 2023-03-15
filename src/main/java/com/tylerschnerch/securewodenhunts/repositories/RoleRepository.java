@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.tylerschnerch.securewodenhunts.models.Role;
 
 @Repository
-public interface RoleRepository extends CrudRepository<Role, Long> {
+public interface RoleRepository extends CrudRepository<Role, Integer> {
 
 	 List<Role> findAll();
 	    
