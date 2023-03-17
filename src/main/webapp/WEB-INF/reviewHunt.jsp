@@ -80,7 +80,7 @@
 		    		</li>
 		    	</ul>
 		    	<div class="container-fluid justify-content-center">	
-		<form:form action="/hunt/confirm/${thisHunt.id}" method="post" modelAttribute="updateHunt">
+		<form:form action="/hunt/confirmed/${lastHunt.id}" method="post" modelAttribute="updateHunt">
 			<input type="hidden" name="_method" value="PUT"/>
 			<div>
 				

@@ -70,7 +70,7 @@
 						
 						<div class="leaseorIdcontainer">
 							<form:errors path="leaseorId" class="test-danger"/>
-							<form:input path="leaseorId" type="hidden" value="${thisLease.user.id}"/>
+							<form:input path="leaseorId" type="hidden" value="${thisLease.usersId}"/>
 						</div>
 						
 						<div class="startDate">
@@ -91,6 +91,8 @@
 							<form:errors path="confirmed" class="test-danger"/>
 							<form:input path="confirmed" type="hidden" value="false"/>
 						</div>
+						
+					
 						
 						<div class="rateContainer">
 							

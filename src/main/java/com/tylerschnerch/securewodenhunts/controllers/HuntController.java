@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tylerschnerch.securewodenhunts.models.Hunt;
-import com.tylerschnerch.securewodenhunts.models.Lease;
 import com.tylerschnerch.securewodenhunts.models.User;
 import com.tylerschnerch.securewodenhunts.services.HuntService;
 import com.tylerschnerch.securewodenhunts.services.LeaseService;
@@ -116,5 +116,23 @@ public class HuntController {
 	    
 	    
 	    return "reviewHunt.jsp";
+	}
+	
+	@PutMapping("/confirmed/{id}")
+	public String confirmedHunt(@PathVariable("id") Integer id,@ModelAttribute("updateHunt") Hunt hunt, Model model, HttpSession session, String username, Principal principal) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+			
+			return "redirect:/yourhunts";
+	}
+	
+	@GetMapping("/yourhunts")
+	public String yourHunts(@ModelAttribute("yourHunts") Hunt hunt, Model model, Integer id, HttpSession session, String username, Principal principal) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+			
+			return "yourHunts.jsp";
 	}
 }
