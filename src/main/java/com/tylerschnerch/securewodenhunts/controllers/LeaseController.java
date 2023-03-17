@@ -53,144 +53,137 @@ public class LeaseController {
 		if(session.getAttribute("userId") == null) {
     		return "redirect:/";
 		}
-		//Integer userId =(Integer) session.getAttribute("userId");
-		//String username = principal.getName();
+		
 		Lease lease = leaseService.findLease(id);
 		model.addAttribute("thisLease", lease);
-		//User thisUser = userService.findById(userId);
 		Integer userId = (Integer) session.getAttribute("userId");
 		Long longUserId = userId.longValue(); 
 		model.addAttribute("userId",longUserId);
 		String username = principal.getName();
 		User user = userService.findByUsername(username); 
 		model.addAttribute("user", user);
-		//System.out.println(thisUser.getId());
-		//We need an empty hunt here so we can bind the the hunt to the result in the create hunt method
 		model.addAttribute("thisHunt", hunt);
 				return "leaseshow.jsp";
 	}
 
-			@RequestMapping("/{id}/edit")
-			public String editThisLease(@PathVariable("id") Integer id, Model model, HttpSession session, Object sessionId, Integer leasesUserId) {
-				sessionId =  session.getAttribute("userId");
-				System.out.println(sessionId);
-				//session check
-				if (session.getAttribute("userId") == null) {
-					return "redirect:/logout";
-				}
+    @RequestMapping("/{id}/edit")
+    public String editThisLease(@PathVariable("id") Integer id, Model model, HttpSession session, Object sessionId, Integer leasesUserId) {
+    	sessionId =  session.getAttribute("userId");
+    	
+    	if (session.getAttribute("userId") == null) {
+    		return "redirect:/logout";
+    	}
+    	
+    	Lease lease = leaseService.findLease(id);
+    	model.addAttribute("thisLease", lease);
+    	leasesUserId =  lease.getUsersId();
+				
+    	if (sessionId == leasesUserId) {
+    		return "editlease.jsp";
+    	}
+    	return "editlease.jsp";
+    }
 
-				
-				Lease lease = leaseService.findLease(id);
-				model.addAttribute("thisLease", lease);
-				leasesUserId =  lease.getUsersId();
-				
-				System.out.println(leasesUserId);
+    @GetMapping("/all")
+    public String allLeases(HttpSession session, Model model, Principal principal) {
+    	if (session.getAttribute("userId") == null) {
+    		return "redirect:/logout";
+    	}
+    	String username = principal.getName();
+    	User user = userService.findByUsername(username);
+    	System.out.println(user);
+    	model.addAttribute("user", userService.findByUsername(username));
+    	List <Lease> leases = leaseService.allLeases();
+    	model.addAttribute("allLeases", leases);
+    	return "leasedashboard.jsp";
+    }
 
-				if (sessionId == leasesUserId) {
-					System.out.println("edit lease");
-					return "editlease.jsp";
-				}
-				return "editlease.jsp";
-			}
+    @GetMapping("/myleases")
+    public String myLeases(HttpSession session, Model model, Principal principal, String username, User user) {
+    	if (session.getAttribute("userId") == null) {
+    		return "redirect:/logout";
+    	}
+				
+    	username = principal.getName();
+    	System.out.println(username);
+    	Integer userId = (Integer) session.getAttribute("userId");
+		User theUser =  userService.findByUsername(username);
+		System.out.println(theUser);
+    	model.addAttribute("user",theUser);
+    	
+    	List <Lease> myleases = leaseService.allUserLeasesById(userId);
+    	model.addAttribute("myLeases", myleases);
+				
+    	return"myleases.jsp";
+    }
 
-			@GetMapping("/all")
-			public String allLeases(HttpSession session, Model model, Principal principal) {
-				if (session.getAttribute("userId") == null) {
-					return "redirect:/logout";
-				}
-				String username = principal.getName();
-				model.addAttribute("user", userService.findByUsername(username));
-				List <Lease> leases = leaseService.allLeases();
-				model.addAttribute("allLeases", leases);
-				return "leasedashboard.jsp";
-			}
-
-			@GetMapping("/myleases")
-			public String myLeases(HttpSession session, Model model, Principal principal, String username, User user) {
-				if (session.getAttribute("userId") == null) {
-					return "redirect:/logout";
-				}
-				
-				username = principal.getName();
-				Integer userId = (Integer) session.getAttribute("userId");
-				Long userIdLong = userId.longValue();
-				//String username = principal.getName();
-				//WNTLOCB: the user needs to be able to see their leases we will get these leases by their id
-				//User user =  userService.findByUsername(username);
-				User theUser =  userService.findByUsername(username);
-				model.addAttribute("user",theUser);
-				List <Lease> myleases = leaseService.allUserLeasesById(userId);
-				model.addAttribute("myLeases", myleases);
-				
-				return"myleases.jsp";
-			}
-
-			@GetMapping("/near/{userszipcode}")
-			public String leasesNearMe(@PathVariable("userszipcode") String zipcode, Model model, HttpSession session, 
-					String username,  Principal principal) {
-				
-				username = principal.getName();
-				User theUser =  userService.findByUsername(username);
-				String usersZipcode = theUser.getZipcode();
-				System.out.println(usersZipcode );
-				List <Lease> leasesNearZip = leaseService.allZipsLeases(usersZipcode );  
-				model.addAttribute("leasesNearMe", leasesNearZip);
-				model.addAttribute("usersZipcode", usersZipcode);
-				
-				
-				return"leasesnearme.jsp";
-			}
+    @GetMapping("/near/{zipcode}")
+    public String leasesNearMe(@PathVariable("zipcode") String zipcode, Model model, HttpSession session, 
+    		String username,  Principal principal) {
+    	System.out.println("A");
+    	username = principal.getName();
+    	System.out.println("B");
+    	User theUser =  userService.findByUsername(username);
+    	System.out.println("C");
+    	String usersZipcode = theUser.getZipcode();
+    	System.out.println("D");
+    	List <Lease> leasesNearZip = leaseService.allZipsLeases(usersZipcode );  
+    	System.out.println("E");
+    	model.addAttribute("leasesNearMe", leasesNearZip);
+    	System.out.println("F");
+    	model.addAttribute("usersZipcode", usersZipcode);
+    	System.out.println("G");
+    	return"leasesnearme.jsp";
+    }
 
 		//////////////////////// post methods//////////////////////////
 			//Create Lease
-			@PostMapping("/create")
-			public String createNewLease(@Valid @ModelAttribute("newLease") Lease lease, BindingResult result,
-					HttpSession session) {
-				if (session.getAttribute("userId") == null) {
+    @PostMapping("/create")
+    public String createNewLease(@Valid @ModelAttribute("newLease") Lease lease, BindingResult result,
+    		HttpSession session) {
+    	if (session.getAttribute("userId") == null) {
+    		return "redirect:/logout";
+    	}
 
-					return "redirect:/logout";
-				}
+    	if (result.hasErrors()) {
+    		List<FieldError> errors = result.getFieldErrors();
+    		for (FieldError error : errors ) {
+    			System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+    		}
+     		return "redirect:/lease/new";
 
-				if (result.hasErrors()) {
-					List<FieldError> errors = result.getFieldErrors();
-				    for (FieldError error : errors ) {
-				        System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
-				    }
-					System.out.println("A");
-					return "redirect:/lease/new";
+    	} else {
+    		System.out.println("C");
+    		leaseService.createLease(lease);
+    		System.out.println("D");
+    		return "redirect:/lease/all";
+    	}
+    }
 
-				} else {
-					System.out.println("C");
-					leaseService.createLease(lease);
-					System.out.println("D");
-					return "redirect:/lease/all";
-				}
-		}
+    @PutMapping("/{id}/update")
+    public String updateLease(@Valid @ModelAttribute("aLease") Lease lease, BindingResult result, Model model, HttpSession session) {
 
-		@PutMapping("/{id}/update")
-		public String updateLease(@Valid @ModelAttribute("aLease") Lease lease, BindingResult result, Model model, HttpSession session) {
-
-		if (session.getAttribute("userId") == null) {
+    	if (session.getAttribute("userId") == null) {
 				return "redirect:/logout";
-		}
+    	}
 
-		if (result.hasErrors()) {
-				model.addAttribute("aLease", lease);
-				return "editlease.jsp";
-		}
-		leaseService.update(lease);
-			return "redirect:/lease/all";
-		}
+    	if (result.hasErrors()) {
+    		model.addAttribute("aLease", lease);
+    		return "editlease.jsp";
+    	}
+    	leaseService.update(lease);
+    	return "redirect:/lease/all";
+    }
 
-	@PostMapping("/delete/{id}")
-		public String deleteLease(@PathVariable("id") Integer id, HttpSession session) {
+    @PostMapping("/delete/{id}")
+    public String deleteLease(@PathVariable("id") Integer id, HttpSession session) {
 
-			if (session.getAttribute("userId") == null) {
-				return "redirect:/logout";
-			}
+    	if (session.getAttribute("userId") == null) {
+    		return "redirect:/logout";
+    	}
 
-			leaseService.deleteLease(id);
-			return"redirect:/lease/all";
-		}
+    	leaseService.deleteLease(id);
+    	return"redirect:/lease/all";
+    }
 
 }

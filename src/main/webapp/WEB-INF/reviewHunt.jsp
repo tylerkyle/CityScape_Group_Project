@@ -91,6 +91,11 @@
 				<input class="button" type="submit" value="Confirm booking"/>
 			</div>
 		</form:form>
+		<form:form action="/hunt/delete/${lastHunt.id}" method="post" modelAttribute="updateHunt">
+		 	<div>
+				<input class="button" type="submit" value="Cancel booking"/>
+			</div>
+		 </form:form>
 		</div>
 		    </div>
 	</body>

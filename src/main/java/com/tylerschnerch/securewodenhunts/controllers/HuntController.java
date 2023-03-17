@@ -41,7 +41,7 @@ public class HuntController {
 	@Autowired HuntService huntService;
 	
 	@PostMapping("/submit/{id}")
-	public String createNewHunt( @Valid  @ModelAttribute("newHunt") @PathVariable("id") Integer id, Hunt hunt, BindingResult result, 
+	public String createNewHunt( @PathVariable("id") Integer id, @Valid @ModelAttribute("newHunt") Hunt hunt, BindingResult result, 
 			HttpSession session) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
@@ -56,22 +56,14 @@ public class HuntController {
 
 		} else { 
 			System.out.println("C");
-			huntService.createHunt(hunt);
-			//Lease lease = leaseService.findLease(id);
-			//List<Hunt> hunts = lease.getHunts();
-			//hunts.add(hunt);
-			//lease.setHunts(hunts);
-			//Hunt lastHunt = hunts.get(0);
-			//List <Lease> lastHuntsLease = lastHunt.getLease();
-			//lastHunt.setLease(lease);
-			
-			
+			huntService.update(hunt);
 			
 			System.out.println("D");
 			return "redirect:/hunt/review";
 			}
 	
 		}
+	
 	@GetMapping("/review")
 	public String reviewHunt(@ModelAttribute("updateHunt") Hunt hunt, Model model, Integer id, HttpSession session, String username, Principal principal) {
 		if (session.getAttribute("userId") == null) {
@@ -135,4 +127,15 @@ public class HuntController {
 			
 			return "yourHunts.jsp";
 	}
+	
+	 @PostMapping("/delete/{id}")
+	    public String deleteHunt(@PathVariable("id") Integer id, HttpSession session) {
+
+	    	if (session.getAttribute("userId") == null) {
+	    		return "redirect:/logout";
+	    	}
+
+	    	huntService.deleteHunt(id);
+	    	return"redirect:/lease/all";
+	    }
 }
