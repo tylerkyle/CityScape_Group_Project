@@ -29,9 +29,69 @@
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/leaseDashboard.css" />" />
 <meta charset="ISO-8859-1">
-<title>Confirm your hunt</title>
+<title>Woden Hunts: Leases near me</title>
 </head>
 <body>
-
-</body>
+	<div class="links navbarlinks navbar navbar-expand-lg navbar-light bg-light">
+	<!-- TODO: Delete before production: Needs to generate query -->
+		
+		<a href="/lease/myleases" class="btn btn-success">Your hunting leases </a>
+		<a href="/lease/new" class="btn btn-success">Create hunting lease </a>
+		<a href="/lease/all" class="btn btn-success">All hunting leases</a>
+		<a href="/profile/edit" class="btn btn-success">Edit profile</a>
+		<a href="/logout" class="btn btn-success">Logout</a>
+	</div>
+	
+	
+	<div id="allhuntingleases" class="allHuntingLeases">
+			
+			<h2> Confirm Hunt details</h2>
+				<ul class="leaseCard">
+		    				
+		    		
+		    		<li> Start date </li>
+		    		
+		    		<li>
+		    			<c:out value="${lastHunt.startDate}"/>
+		    		</li>
+		    		<li> End date </li>
+		    		<li>
+		    			<c:out value="${lastHunt.endDate}"/> 
+		    		</li>
+		    		<li> Total days</li>
+		    		<li>
+		    			<c:out value="${lastHunt.totalDays}"/> 
+		    		</li>
+		    		<li> Booking total</li>
+		    		<li>
+		    			<c:out value="$${lastHunt.total}"/>
+		    		</li>
+		    		<li> Tax</li>
+		    		<li>
+		    			<c:out value="$${lastHunt.tax}"/> 
+		    		</li>
+		    		<li> Service fee</li>
+		    		<li>
+		    			<c:out value="$${lastHunt.serviceFee}"/> 
+		    		</li>
+		    		<li> Grand total</li>
+		    		<li>
+		    			<c:out value="$${lastHunt.grandTotal}"/>
+		    		</li>
+		    	</ul>
+		    	<div class="container-fluid justify-content-center">	
+		<form:form action="/hunt/confirm/${thisHunt.id}" method="post" modelAttribute="updateHunt">
+			<input type="hidden" name="_method" value="PUT"/>
+			<div>
+				
+				<form:errors path="confirmed" class="text-danger"/>
+				<form:input  path="confirmed" type="hidden" value="true"/>
+			</div>
+			<div>
+				<input class="button" type="submit" value="Confirm booking"/>
+			</div>
+		</form:form>
+		</div>
+		    </div>
+	</body>
 </html>

@@ -54,7 +54,19 @@ public class User {
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Lease> leases;
     
-    @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Lease> getLeases() {
+		return leases;
+	}
+	public void setLeases(List<Lease> leases) {
+		this.leases = leases;
+	}
+	public List<Hunt> getHunts() {
+		return hunts;
+	}
+	public void setHunts(List<Hunt> hunts) {
+		this.hunts = hunts;
+	}
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
    	private List<Hunt> hunts;
         
     

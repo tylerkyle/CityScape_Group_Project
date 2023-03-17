@@ -17,7 +17,7 @@ public interface HuntRepository extends CrudRepository <Hunt, Integer> {
 	    //Long saveById(String thisBookId);
 	    List<Hunt> findByUserId(Integer id);
 	    
-	    Long save(Integer id);
+	    Integer save(Integer id);
 	    //Long save(Long id);
 	    
 	   

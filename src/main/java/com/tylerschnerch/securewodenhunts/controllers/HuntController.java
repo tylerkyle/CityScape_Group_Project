@@ -39,6 +39,7 @@ public class HuntController {
 	@Autowired
 	UserService userService;
 	@Autowired HuntService huntService;
+	
 	@PostMapping("/submit/{id}")
 	public String createNewHunt( @Valid  @ModelAttribute("newHunt") @PathVariable("id") Integer id, Hunt hunt, BindingResult result, 
 			HttpSession session) {
@@ -72,13 +73,16 @@ public class HuntController {
 	
 		}
 	@GetMapping("/review")
-	public String reviewHunt( Model model, Integer id, HttpSession session, String username, Principal principal) {
+	public String reviewHunt(@ModelAttribute("updateHunt") Hunt hunt, Model model, Integer id, HttpSession session, String username, Principal principal) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
+		//user stuff
 		username = principal.getName();
 		User theUser =  userService.findByUsername(username);
 		Integer usersId = theUser.getId();
+		model.addAttribute("user",theUser);
+		model.addAttribute("updateHunt", hunt);
 		
 		List <Hunt> hunts = huntService.allOfAUsersHunts(usersId);
 		ArrayList<Hunt> huntsArray = (ArrayList <Hunt>) hunts;
@@ -108,6 +112,7 @@ public class HuntController {
 	    lastHunt.setGrandTotal(grandTotal);
 	    
 	    model.addAttribute("lastHunt", lastHunt);
+		
 	    
 	    
 	    return "reviewHunt.jsp";

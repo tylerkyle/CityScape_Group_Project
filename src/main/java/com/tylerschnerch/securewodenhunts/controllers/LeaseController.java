@@ -46,36 +46,36 @@ public class LeaseController {
 				return"newlease.jsp";
 			}
 
-			@GetMapping("/{id}")
-			public String thisLease(@ModelAttribute("newHunt") Hunt hunt,
-					@PathVariable("id") Integer id, Model model,
-					HttpSession session, Principal principal) {
-				if(session.getAttribute("userId") == null) {
-		    		return "redirect:/";
-				}
-				System.out.println("Good one");
-				//Integer userId =(Integer) session.getAttribute("userId");
-				//String username = principal.getName();
-				Lease lease = leaseService.findLease(id);
-				System.out.println("Good two");
-				model.addAttribute("thisLease", lease);
-				System.out.println("Good three");
-				//User thisUser = userService.findById(userId);
-				Integer userId = (Integer) session.getAttribute("userId");
-				System.out.println("Good four");
-				Long longUserId = userId.longValue(); 
-				System.out.println("Good five");
-				model.addAttribute("userId",longUserId);
-				String username = principal.getName();
-				User user = userService.findByUsername(username); 
-				model.addAttribute("user", user);
-				System.out.println("Good six");
-				//System.out.println(thisUser.getId());
-				//We need an empty hunt here so we can bind the the hunt to the result in the create hunt method
-				model.addAttribute("thisHunt", hunt);
-				System.out.println("Good seven");
-				return "leaseshow.jsp";
-			}
+    @GetMapping("/{id}")
+	public String thisLease(@ModelAttribute("newHunt") Hunt hunt,
+			@PathVariable("id") Integer id, Model model,
+			HttpSession session, Principal principal) {
+		if(session.getAttribute("userId") == null) {
+    		return "redirect:/";
+		}
+		System.out.println("Good one");
+		//Integer userId =(Integer) session.getAttribute("userId");
+		//String username = principal.getName();
+		Lease lease = leaseService.findLease(id);
+		System.out.println("Good two");
+		model.addAttribute("thisLease", lease);
+		System.out.println("Good three");
+		//User thisUser = userService.findById(userId);
+		Integer userId = (Integer) session.getAttribute("userId");
+		System.out.println("Good four");
+		Long longUserId = userId.longValue(); 
+		System.out.println("Good five");
+		model.addAttribute("userId",longUserId);
+		String username = principal.getName();
+		User user = userService.findByUsername(username); 
+		model.addAttribute("user", user);
+		System.out.println("Good six");
+		//System.out.println(thisUser.getId());
+		//We need an empty hunt here so we can bind the the hunt to the result in the create hunt method
+		model.addAttribute("thisHunt", hunt);
+		System.out.println("Good seven");
+		return "leaseshow.jsp";
+	}
 
 			@RequestMapping("/{id}/edit")
 			public String editThisLease(@PathVariable("id") Integer id, Model model, HttpSession session, Object sessionId, Integer leasesUserId) {
@@ -128,7 +128,7 @@ public class LeaseController {
 				model.addAttribute("user",theUser);
 				List <Lease> myleases = leaseService.allUserLeasesById(userId);
 				model.addAttribute("myLeases", myleases);
-
+				
 				return"myleases.jsp";
 			}
 
