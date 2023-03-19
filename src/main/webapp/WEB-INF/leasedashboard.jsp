@@ -18,7 +18,7 @@
 </head>
 <body>
 	
-	<div class="links navbarlinks navbar navbar-expand-lg navbar-light bg-light">
+	<div class="links navbarlinks navbar navbar-expand-lg navbar-light bg-light" id="navbar">
 	<!-- TODO: Delete before production: Needs to generate query -->
 		<a href="/lease/near/${user.zipcode}" class="btn btn-success"> Hunting leases near you</a>
 		<a href="/lease/myleases" class="btn btn-success">Your hunting leases </a>
@@ -26,9 +26,7 @@
 		<a href="/logout" class="btn btn-success">Logout</a>
 	</div>
 	<div>
-		<h1 class="title"> Woden Hunts: instant hunting leases</h1>
-		<p class="greeting">Welcome <c:out value="${user.username}"></c:out> list or book your hunting lease instantly</p>
-		
+		<h1 class="title"> Instantly book hunting leases</h1>
 	</div>
 	
 	<div id="hunt-info" class="main-container">
