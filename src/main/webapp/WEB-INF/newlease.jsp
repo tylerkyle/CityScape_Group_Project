@@ -10,13 +10,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- for Bootstrap CSS -->
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-
-<!-- For any Bootstrap that uses JS or jQuery-->
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<link type="text/css" rel="stylesheet" href="<c:url value="/css/newLease.css" />" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
 <meta charset="ISO-8859-1">
 <title>Create New Hunt</title>
 </head>

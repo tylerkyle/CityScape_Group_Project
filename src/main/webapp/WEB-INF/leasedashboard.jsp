@@ -10,66 +10,60 @@
 <html>
 <head>
 <!-- for Bootstrap CSS -->
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
 
 <meta charset="ISO-8859-1">
 <title>Woden:Hunting Leases near you</title>
 </head>
-<body>
-	
-	<div class="links navbarlinks navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-	<!-- TODO: Delete before production: Needs to generate query -->
-		<a href="/lease/near/${user.zipcode}" class="btn btn-success"> Hunting leases near you</a>
-		<a href="/lease/myleases" class="btn btn-success">Your hunting leases </a>
-		<a href="/lease/new" class="btn btn-success">Create hunting lease </a>
-		<a href="/logout" class="btn btn-success">Logout</a>
-	</div>
-	<div>
-		<h1 class="title"> Instantly book hunting leases</h1>
-	</div>
-	
-	<div id="hunt-info" class="main-container">
-		<div class="map">
-			<p>Map</p>
+<body id="body">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	<div class="w-auto m-2" id="headingcontainer">
+		<div id="titlecontainer">
+			<h1
+				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold m-1 p-1"
+				id="title">Instantly book hunting leases</h1>
 		</div>
-	
-	
-		<div id="allhuntingleases" class="allHuntingLeases">
+
+		<div
+			class="navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto m-2 p-2"
+			id="navbar">
+			<!-- TODO: Delete before production: Needs to generate query -->
+			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2">
+				Hunting leases near you</a> <a href="/lease/myleases"
+				class="btn btn-success m-2 p-2">Your hunting leases </a> <a
+				href="/lease/new" class="btn btn-success m-2 p-2">Create hunting lease </a>
+			<a href="/logout" class="btn btn-success m-2 p-2">Logout</a>
+		</div>
+	</div>
+
+	<div id="huntinfo" class="main-container ">
+		
+		
+		
 			
-			<h2> All leases </h2>
+		<div id="allhuntingleases" class="card row d-flex flex-row justify-content-between p-5   allHuntingLeases" id="leasecontainer">
+			<div class="w-max ">
+			<h2 class=" justify-text-center justify-content-center m-2 p-2">All leases</h2>
+		</div>
+			
 			<c:forEach var="thisLease" items="${allLeases}">
-				<ul class="leaseCard">
-		    		<li>
-		    			<a href="/lease/${thisLease.id}"><c:out value="${thisLease.title}"/></a>
-		    		</li>
-		       	
-		       		<li>
-		       			<c:out value="${thisLease.game}"/>
-		       		
-		        	</li>	
-		        
-		        	<li>
-		       			<c:out value="${thisLease.rate}"/>
-		       		</li>
-		       	<!-- 
-		       	
-		       	TODO: Delete before production: acessPoints will have to be own class
-		       	Hunts will have a list of acessPoint classes
-		       	
-		       	-->
-		       		<li>
-		       			<c:out value="${thisLease.accessPoints}"/>
-		       		</li>
-		       	
-		       		<li>
-		       			<c:out value="${thisLease.blinds}"/>
-		       		</li>
-		       	
-		       		<li>
-		       			<c:out value="${thisLease.stands}"/>
-		       		</li>	
-		    	</ul>
+				<div class="leaseCard m-2 p-2 col-3 ">
+		    		<h5 class="card-title justify-conent-center">
+		    		<c:out value="${thisLease.title}"/>
+		    		</h5>
+
+					<ul class="list-group ">
+						<li class="list-group-item"><c:out value="Game types: ${thisLease.game}" /></li>
+						<li class="list-group-item"><c:out value="Daily rate: $${thisLease.rate}" /></li>
+		       			<li class="list-group-item"><c:out value="Access points: ${thisLease.accessPoints}" /></li>
+		       			<li class="list-group-item"><c:out value="Blinds: ${thisLease.blinds}" /></li>
+						<li class="list-group-item"><c:out value="Stands: ${thisLease.stands}" /></li>
+						<li class="list-group-item"><c:out value="Property zipcode: ${thisLease.zipcode}" /></li>
+						
+						 <a href="/lease/${thisLease.id}" class="btn btn-primary m-2 p-2">View Lease</a>
+					</ul>
+				</div>
 			</c:forEach>
 			
 		</div>
