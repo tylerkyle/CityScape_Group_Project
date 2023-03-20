@@ -42,7 +42,17 @@ public class User {
     @Transient
     private String passwordConfirmation;
     
-    private Date createdAt;
+    private Integer hasHunts;
+    
+   
+	
+	public Integer getHasHunts() {
+		return hasHunts;
+	}
+	public void setHasHunts(Integer hasHunts) {
+		this.hasHunts = hasHunts;
+	}
+	private Date createdAt;
     private Date updatedAt;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -68,7 +78,9 @@ public class User {
 	}
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
    	private List<Hunt> hunts;
-        
+	
+	
+
     
 	public User() {
     }

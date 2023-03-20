@@ -11,57 +11,56 @@
 <head>
 <title>Woden Hunts: your leases</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
+<link rel="stylesheet" type="text/css" href="/css/myleases.css">
 </head>
 <body>
-	
-	
-	<div class="navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-max">
-	<!-- TODO: Delete before production: Needs to generate query -->
-		<a href="/lease/near/${user.zipcode}" class="btn btn-success"> Hunting leases near you</a>
-		<a href="/lease/myleases" class="btn btn-success">Your hunting leases </a>
-		<a href="/lease/new" class="btn btn-success">Create hunting lease </a>
-		<a href="/lease/all" class="btn btn-success">All hunting leases</a>
-		<a href="/profile/edit" class="btn btn-success">Edit profile</a>
-		<a href="/logout" class="btn btn-success">Logout</a>
+	<div class="w-max" id="headingcontainer">
+		<div id="titlecontainer">
+			<h1
+				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
+				id="title">Instantly book hunting leases</h1>
+		</div>
+
+		<div
+			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
+			id="navbar">
+			<!-- TODO: Delete before production: Needs to generate query -->
+			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
+			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
+				Hunting leases near you</a> <a href="/lease/myleases"
+				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> <a
+				href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
+			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
+		</div>
 	</div>
-	
-	<div class="card">
-  <h5 class="card-header">Featured</h5>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
 		
 	<div class="container-fluid">
 		<div class="row justify-content-center m-2 p-2">
-			<div class="col-4 ">
-				<div id="allhuntingleases" class="allHuntingLeases">
+			<div class="col-4 m-2 p-2 ">
+				<div id="allhuntingleases" class="allHuntingLeases m-2 p-2">
 
 					<h2>Manage your hunting leases</h2>
 					<c:forEach var="thisLease" items="${myLeases}">
 						<c:if test="${userId == thisLease.usersId }">
-							<div class="card">
+							<div class="card m-2 p-2">
 								<ul class="leaseCard">
-									<li class="card-title"><a href="/lease/${thisLease.id}"><c:out
-												value="${thisLease.title}" /></a></li>
+									<li class="card-title"> <c:out value="Title: ${thisLease.title}" /> </li>
 
-									<li><c:out value="${thisLease.game}" /></li>
+									<li><c:out value="Game types: ${thisLease.game}" /></li>
 
-									<li><c:out value="${thisLease.rate}" /></li>
+									<li><c:out value="Daily rate: ${thisLease.rate}" /></li>
 									<!-- 
 		       	
 		       	TODO: Delete before production: acessPoints will have to be own class
 		       	Hunts will have a list of acessPoint classes
 		       	
 		       	-->
-									<li><c:out value="${thisLease.accessPoints}" /></li>
+									<li><c:out value="Access points: ${thisLease.accessPoints}" /></li>
 
-									<li><c:out value="${thisLease.blinds}" /></li>
+									<li><c:out value="Blinds: ${thisLease.blinds}" /></li>
 
-									<li><c:out value="${thisLease.stands}" /></li>
+									<li><c:out value="Stands: ${thisLease.stands}" /></li>
+									<a href="/lease/${thisLease.id}" class="btn btn-primary p-2 m-2" id="viewleasebutton">View lease</a>
 								</ul>
 								</div>
 						</c:if>

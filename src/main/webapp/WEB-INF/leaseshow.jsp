@@ -10,20 +10,27 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
+<link rel="stylesheet" type="text/css" href="/css/leasenearme.css">
 <title>Hunting lease details</title>
 </head>
 <body id="body">
-	<div class="container-fluid " id="">
+	<div class="w-max" id="headingcontainer">
+		<div id="titlecontainer">
+			<h1
+				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
+				id="title">Instantly book hunting leases</h1>
+		</div>
+
 		<div
-			class="navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-max"
+			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
 			id="navbar">
-			<a href="/lease/all" class="btn btn-success m-2 p-2">All leases</a>
-			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2">
+			<!-- TODO: Delete before production: Needs to generate query -->
+			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
+			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
 				Hunting leases near you</a> <a href="/lease/myleases"
-				class="btn btn-success m-2 p-2">Your hunting leases </a> <a
-				href="/lease/new" class="btn btn-success m-2 p-2">Create hunting lease </a>
-			<a href="/logout" class="btn btn-success m-2 p-2">Logout</a>
+				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> <a
+				href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
+			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
 		</div>
 	</div>
 		<div class="row justify-content-center justify-text-center">
@@ -103,7 +110,7 @@
 
 									<div class="submitButton">
 										<input class="button btn btn-success m-2 p-2 justify-text-center" type="submit"
-											value="Review booking" />
+											value="Review booking" id="reviewbooking" />
 									</div>
 								</div>
 							</form:form>
@@ -119,7 +126,7 @@
 						<input type="hidden" name="_method" value="post"  />
 
 						<div class="form-row">
-							<input type="submit" value="Delete" class="btn btn-danger m-2 p-2" />
+							<input type="submit" value="Delete" class="btn btn-danger m-2 p-2" id="submit" />
 						</div>
 					</form:form>
 

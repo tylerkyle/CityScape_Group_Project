@@ -111,20 +111,30 @@ public class HuntController {
 	}
 	
 	@PutMapping("/confirmed/{id}")
-	public String confirmedHunt(@PathVariable("id") Integer id,@ModelAttribute("updateHunt") Hunt hunt, Model model, HttpSession session, String username, Principal principal) {
+	public String confirmedHunt(@PathVariable("id") Integer id,@ModelAttribute("updateHunt") Hunt hunt, Model model, HttpSession session, Principal principal) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
+		String username = principal.getName();
+		User user = userService.findByUsername(username);	
+		Integer userHasHunts = 1;
+		Integer hasHunts = user.getHasHunts();
+		user.setHasHunts(userHasHunts);
+		
+		
+		
 			
-			return "redirect:/yourhunts";
+			return "redirect:/hunt/yourhunts";
 	}
 	
 	@GetMapping("/yourhunts")
-	public String yourHunts(@ModelAttribute("yourHunts") Hunt hunt, Model model, Integer id, HttpSession session, String username, Principal principal) {
+	public String yourHunts(@ModelAttribute("yourHunts") Hunt hunt, Model model, Integer id, HttpSession session, Principal principal) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
-			
+		String username = principal.getName();
+		User user = userService.findByUsername(username);	
+		System.out.println(user.getHasHunts());	
 			return "yourHunts.jsp";
 	}
 	

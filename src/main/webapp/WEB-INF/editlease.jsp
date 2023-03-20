@@ -10,20 +10,41 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
+<link rel="stylesheet" type="text/css" href="/css/editlease.css">
 <title>Edit lease</title>
 </head>
 <body>
-	<div>
-		<h1><c:out value="${thisLease.title}"></c:out></h1>
-		<a href="/lease/near/${user.zipcode}">Leases near you </a>
-		<a href="/leases/all">all leases </a>
+<div class="w-max" id="headingcontainer">
+		<div id="titlecontainer">
+			<h1
+				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
+				id="titleheader">Instantly book hunting leases</h1>
+		</div>
+
+		<div
+			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
+			id="navbar">
+			<!-- TODO: Delete before production: Needs to generate query -->
+			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
+			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
+				Hunting leases near you</a> <a href="/lease/myleases"
+				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> <a
+				href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
+			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
+		</div>
 	</div>
-	<h1>Edit <c:out value="thisLease"/></h1>
+	
+	
+	
+
+	
 	<div class="container-fluid justify-content-center">	
-		<form:form action="/lease/${thisLease.id}/update" method="post" modelAttribute="thisLease">
-			<input type="hidden" name="_method" value="PUT"/>
-			<div>
+	<div class="row justify-content-center d-flex flex-wrap">
+	<div class="col-3 m-3 p-3">
+
+				<form:form action="/lease/${thisLease.id}/update" method="post" modelAttribute="thisLease">
+					<input type="hidden" name="_method" value="PUT"/>
+					<div>
 				<form:label path="title">Title: </form:label><br />
 				<form:errors path="title" class="text-danger"/>
 				<form:input path="title"/>
@@ -109,12 +130,14 @@
 			
 			<div>
 				<form:hidden path="usersId" value="${userId}"/>
-			</div>
+					</div>
 	
 			<div>
 				<input class="button" type="submit" value="Update lease lisitng"/>
 			</div>
 	</form:form>
+	</div>
+	</div>
 	</div>
 	
 	<div>

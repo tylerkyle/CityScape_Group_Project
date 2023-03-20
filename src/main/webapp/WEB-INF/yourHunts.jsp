@@ -9,6 +9,31 @@
 <link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
 </head>
 <body>
+	
+	<div class="w-max" id="headingcontainer">
+		<div id="titlecontainer">
+			<h1
+				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
+				id="title">Instantly book hunting leases</h1>
+		</div>
+
+		<div
+			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
+			id="navbar">
+			<!-- TODO: Delete before production: Needs to generate query -->
+			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
+			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
+				Hunting leases near you</a> <a href="/lease/myleases"
+				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> <a
+				href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
+			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4">
+		
+		</div>
+	</div>
 
 </body>
 </html>

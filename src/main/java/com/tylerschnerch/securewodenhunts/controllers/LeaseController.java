@@ -95,6 +95,8 @@ public class LeaseController {
     	model.addAttribute("user", userService.findByUsername(username));
     	List <Lease> leases = leaseService.allLeases();
     	model.addAttribute("allLeases", leases);
+    	List <Hunt> hunts = huntService.allHunts();
+    	model.addAttribute("allHunts", hunts);
     	return "leasedashboard.jsp";
     }
 

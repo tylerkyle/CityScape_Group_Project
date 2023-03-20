@@ -17,17 +17,30 @@
 </head>
 <body>
 	
-	<div class="links navbarlinks navbar navbar-expand-lg navbar-light bg-light">
-	<!-- TODO: Delete before production: Needs to generate query -->
-		<a href="/lease/near/${user.zipcode}" class="btn btn-success"> Hunting leases near you</a>
-		<a href="/lease/myleases" class="btn btn-success">Your hunting leases </a>
-		<a href="/lease/new" class="btn btn-success">Create hunting lease </a>
-		<a href="/lease/all" class="btn btn-success">All hunting leases</a>
-		<a href="/profile/edit" class="btn btn-success">Edit profile</a>
-		<a href="/logout" class="btn btn-success">Logout</a>
-	</div>
 	
-	<h1 class="title"> New Hunt</h1>
+	<div class="w-max" id="headingcontainer">
+		<div id="titlecontainer">
+			<h1
+				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
+				id="titleheader">Instantly book hunting leases</h1>
+		</div>
+
+		<div
+			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
+			id="navbar">
+			
+			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
+			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
+				Hunting leases near you</a> <a href="/lease/myleases"
+				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> <a
+				href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
+			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
+		</div>
+	</div>
+
+	<div class="row justify-content-center"> 
+	<div class="col-4">
+		<h1 class="title"> New Hunt</h1>
 	
 	<div  class="form-group">	
 		<form:form  class="newLeaseForm" action="/lease/create" method="post" modelAttribute="newLease">
@@ -118,7 +131,7 @@
 			</div>
 	
 			<div class="form-input">
-				<input class="button" type="submit" value="Publish lease lisitng"/>
+				<input class="button btn btn-success m-2 p-2" type="submit" value="Publish lease lisitng" id="publishlease" />
 			</div>
 					
 			<div class="form-input">
@@ -127,6 +140,8 @@
 		</div>
 
 	</form:form>
+	</div>
+	</div>
 	</div>
 </body>
 </html>
