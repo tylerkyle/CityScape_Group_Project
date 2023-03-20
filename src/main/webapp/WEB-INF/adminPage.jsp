@@ -22,8 +22,8 @@
 					<li> <c:out value="${thisUser.username}"> </c:out> </li>
 					<li> <a href="admin/${thisUser.id}">Delete </a> </li>
 				</ul>
-			</c:forEach>   	
-	   	</c:if>
+			</c:forEach>
+		</c:if>
 	</c:forEach>
 	   
 	   

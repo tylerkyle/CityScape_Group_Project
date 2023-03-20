@@ -110,7 +110,7 @@ public class HuntController {
 	    
 	    Double grandTotal = total + tax + lastHunt.getServiceFee();
 	    lastHunt.setGrandTotal(grandTotal);
-	    
+	    model.addAttribute("user",theUser);
 	    model.addAttribute("lastHunt", lastHunt);
 		
 	    

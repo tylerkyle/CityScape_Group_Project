@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.tylerschnerch.securewodenhunts.services.HuntService;
+import com.tylerschnerch.securewodenhunts.services.LeaseService;
 import com.tylerschnerch.securewodenhunts.services.UserService;
 import com.tylerschnerch.securewodenhunts.validator.UserValidator;
 
@@ -15,19 +18,21 @@ import com.tylerschnerch.securewodenhunts.validator.UserValidator;
 @Controller
 
 public class AdminController {
-	@Autowired
-	UserValidator userValidator;
-	@Autowired
-	UserService userService;
+	@Autowired LeaseService leaseService;
+	@Autowired UserValidator userValidator;
+	@Autowired UserService userService;
+	@Autowired HuntService huntService;
 
 	@RequestMapping("/super")
 	public String superAdminPage(Principal principal, Model model) {
 		String username = principal.getName();
 
 		model.addAttribute("currentUser", userService.findByUsername(username));
-
-		model.addAttribute("users", userService.allUsers());
-
+		
+		model.addAttribute("allLeases", leaseService.allLeases());
+		System.out.println(model.addAttribute("allLeases", leaseService.allLeases()));
+		model.addAttribute("allHunts", huntService.allHunts());
+		model.addAttribute("allUsers", userService.allUsers());
 		return "superAdminPage.jsp";
 	}
 

@@ -63,7 +63,7 @@ public class HomeController {
 
 		if (userService.allUsers().size() == 0) {
 			userService.newUser(user, "ROLE_SUPER_ADMIN");
-		} else if (userService.allUsers().size() <= 3) {
+		} else if (userService.allUsers().size() <= 2) {
 			userService.newUser(user, "ROLE_ADMIN");
 		} else {
 			userService.newUser(user, "ROLE_USER");

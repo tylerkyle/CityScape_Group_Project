@@ -44,7 +44,7 @@ public class LeaseController {
     		model.addAttribute("user", userService.findByUsername(username));	
     		model.addAttribute("lease", lease);
     		Integer usersId = (Integer)session.getAttribute("usersId");
-    		model.addAttribute("usersId", usersId);
+    		model.addAttribute("userId", usersId);
 				return"newlease.jsp";
 			}
 
@@ -71,7 +71,7 @@ public class LeaseController {
 	}
 
     @RequestMapping("/{id}/edit")
-    public String editThisLease(@PathVariable("id") Integer id, Model model, HttpSession session, Object sessionId, Integer leasesUserId) {
+    public String editThisLease(@PathVariable("id") Integer id, Model model, HttpSession session, Object sessionId, Integer leasesUserId, Principal principal) {
     	sessionId =  session.getAttribute("userId");
     	
     	if (session.getAttribute("userId") == null) {
@@ -81,7 +81,8 @@ public class LeaseController {
     	Lease lease = leaseService.findLease(id);
     	model.addAttribute("thisLease", lease);
     	leasesUserId =  lease.getUsersId();
-				
+    	String username = principal.getName();
+    	model.addAttribute("user", userService.findByUsername(username));		
     	if (sessionId == leasesUserId) {
     		return "editlease.jsp";
     	}
@@ -95,7 +96,8 @@ public class LeaseController {
     	}
     	String username = principal.getName();
     	User user = userService.findByUsername(username);
-    	System.out.println(user);
+    	
+    	
     	model.addAttribute("user", userService.findByUsername(username));
     	List <Lease> leases = leaseService.allLeases();
     	model.addAttribute("allLeases", leases);
@@ -131,7 +133,7 @@ public class LeaseController {
     	username = principal.getName();
     	
     	User theUser =  userService.findByUsername(username);
-    	
+    	model.addAttribute("user", theUser);
     	String usersZipcode = theUser.getZipcode();
     	
     	List <Lease> leasesNearZip = leaseService.allZipsLeases(usersZipcode );  
