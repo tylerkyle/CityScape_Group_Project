@@ -48,4 +48,5 @@ public class HuntService {
 		
 		return huntRepository.findByUserId(id);
 	}
+	
 }

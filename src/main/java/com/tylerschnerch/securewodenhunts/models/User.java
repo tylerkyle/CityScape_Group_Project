@@ -41,17 +41,7 @@ public class User {
     private String password;
     @Transient
     private String passwordConfirmation;
-    
-    private Integer hasHunts;
-    
    
-	
-	public Integer getHasHunts() {
-		return hasHunts;
-	}
-	public void setHasHunts(Integer hasHunts) {
-		this.hasHunts = hasHunts;
-	}
 	private Date createdAt;
     private Date updatedAt;
     @ManyToMany(fetch = FetchType.EAGER)

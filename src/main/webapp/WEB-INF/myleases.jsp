@@ -21,6 +21,7 @@
 				id="title">Instantly book hunting leases</h1>
 		</div>
 
+		
 		<div
 			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
 			id="navbar">
@@ -28,8 +29,9 @@
 			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
 			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
 				Hunting leases near you</a> <a href="/lease/myleases"
-				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> <a
-				href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
+				class="btn btn-success m-2 p-2" id="yourleaselink">Your hunting leases </a> 
+				<a href="/hunt/yourhunts" class="btn btn-success m-2 p-2" id="yourhuntslink" >Your hunts</a>
+				<a href="/lease/new" class="btn btn-success m-2 p-2" id="createleaselink">Create hunting lease </a>
 			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
 		</div>
 	</div>

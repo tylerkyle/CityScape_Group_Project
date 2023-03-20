@@ -43,6 +43,8 @@ public class LeaseController {
     		String username = principal.getName();
     		model.addAttribute("user", userService.findByUsername(username));	
     		model.addAttribute("lease", lease);
+    		Integer usersId = (Integer)session.getAttribute("usersId");
+    		model.addAttribute("usersId", usersId);
 				return"newlease.jsp";
 			}
 
@@ -63,6 +65,8 @@ public class LeaseController {
 		User user = userService.findByUsername(username); 
 		model.addAttribute("user", user);
 		model.addAttribute("thisHunt", hunt);
+		Integer usersId = (Integer)session.getAttribute("usersId");
+		model.addAttribute("usersId", usersId);
 				return "leaseshow.jsp";
 	}
 
@@ -121,7 +125,9 @@ public class LeaseController {
     @GetMapping("/near/{zipcode}")
     public String leasesNearMe(@PathVariable("zipcode") String zipcode, Model model, HttpSession session, 
     		String username,  Principal principal) {
-    	
+    	if (session.getAttribute("userId") == null) {
+    		return "redirect:/logout";
+			}
     	username = principal.getName();
     	
     	User theUser =  userService.findByUsername(username);

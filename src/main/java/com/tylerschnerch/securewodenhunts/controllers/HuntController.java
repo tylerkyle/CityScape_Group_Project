@@ -56,8 +56,7 @@ public class HuntController {
 
 		} else { 
 			System.out.println("C");
-			huntService.update(hunt);
-			
+			huntService.createHunt(hunt);
 			System.out.println("D");
 			return "redirect:/hunt/review";
 			}
@@ -65,21 +64,30 @@ public class HuntController {
 		}
 	
 	@GetMapping("/review")
-	public String reviewHunt(@ModelAttribute("updateHunt") Hunt hunt, Model model, Integer id, HttpSession session, String username, Principal principal) {
+	public String reviewHunt(@ModelAttribute("updateHunt") Hunt hunt, Model model, HttpSession session, String username, Principal principal) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
 		//user stuff
 		username = principal.getName();
+		System.out.println(username);
+		System.out.println("one");
 		User theUser =  userService.findByUsername(username);
-		Integer usersId = theUser.getId();
+		System.out.println("two");
+		Integer usersId = (Integer)session.getAttribute("userId");
+		System.out.println("three");
+		model.addAttribute("usersId", usersId);
+		System.out.println("four");
 		model.addAttribute("user",theUser);
+		System.out.println("five");
 		model.addAttribute("updateHunt", hunt);
-		
+		System.out.println("six");
 		List <Hunt> hunts = huntService.allOfAUsersHunts(usersId);
+		System.out.println("six");
 		ArrayList<Hunt> huntsArray = (ArrayList <Hunt>) hunts;
+		System.out.println("seven");
 		Hunt lastHunt = huntsArray.get(0);
-		
+		System.out.println("eight");
 		Date startDate = lastHunt.getStartDate();
 	    Date endDate = lastHunt.getEndDate();
 	    
@@ -115,14 +123,6 @@ public class HuntController {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
-		String username = principal.getName();
-		User user = userService.findByUsername(username);	
-		Integer userHasHunts = 1;
-		Integer hasHunts = user.getHasHunts();
-		user.setHasHunts(userHasHunts);
-		
-		
-		
 			
 			return "redirect:/hunt/yourhunts";
 	}
@@ -132,9 +132,16 @@ public class HuntController {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
+		Integer usersId = (Integer)session.getAttribute("userId");
 		String username = principal.getName();
 		User user = userService.findByUsername(username);	
-		System.out.println(user.getHasHunts());	
+		
+		List<Hunt> usersHunts = huntService.allOfAUsersHunts(usersId);
+		System.out.println(usersHunts);
+		username = principal.getName();
+		model.addAttribute("user",user);
+		model.addAttribute("usersHunts", usersHunts);
+		
 			return "yourHunts.jsp";
 	}
 	
