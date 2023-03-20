@@ -13,13 +13,12 @@
 <link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
 <title>Hunting lease details</title>
 </head>
-<body>
-
-	<div class="container-fluid ">
+<body id="body">
+	<div class="container-fluid " id="">
 		<div
-			class="navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto m-2 p-2"
+			class="navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-max"
 			id="navbar">
-			<!-- TODO: Delete before production: Needs to generate query -->
+			<a href="/lease/all" class="btn btn-success m-2 p-2">All leases</a>
 			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2">
 				Hunting leases near you</a> <a href="/lease/myleases"
 				class="btn btn-success m-2 p-2">Your hunting leases </a> <a
@@ -29,55 +28,30 @@
 	</div>
 		<div class="row justify-content-center justify-text-center">
 			<div class="col-5">
-				<h1>
+			<div class="card m-2 p-2">
+				<h1 class="card-title m-2 p-2">
 					<c:out value="${thisLease.title}"></c:out>
 				</h1>
 				<div>
-					<ul>
-						<li>Title: <c:out value="${thisLease.title}"></c:out>
+					<ul class="list-group ">
+						<li class="list-group-item m-2 p-2">Title: <c:out value="${thisLease.title}"></c:out>
 						</li>
-						<li>Game: <c:out value="${thisLease.game}"></c:out>
+						<li class="list-group-item m-2 p-2">Game: <c:out value="${thisLease.game}"></c:out>
 						</li>
-
-						<li>Access points: <c:out value="${thisLease.accessPoints}"></c:out>
+						<li class="list-group-item m-2 p-2">Access points: <c:out value="${thisLease.accessPoints}"></c:out>
 						</li>
-						<li>Blinds: <c:out value="${thisLease.blinds}"></c:out>
+						<li class="list-group-item m-2 p-2">Blinds: <c:out value="${thisLease.blinds}"></c:out>
 						</li>
-						<li>Stands: <c:out value="${thisLease.stands}"></c:out>
+						<li class="list-group-item m-2 p-2">Stands: <c:out value="${thisLease.stands}"></c:out>
 						</li>
-						<li>AM Rate: <c:out value="$${thisLease.rate}"></c:out>
+						<li class="list-group-item m-2 p-2">AM Rate: <c:out value="$${thisLease.rate}"></c:out>
 						</li>
-						<li>PM Rate: <c:out value="$${thisLease.rate}"></c:out>
+						<li class="list-group-item m-2 p-2">PM Rate: <c:out value="$${thisLease.rate}"></c:out>
 						</li>
-						<li>Zip code: <c:out value="${thisLease.zipcode}"></c:out>
+						<li class="list-group-item m-2 p-2">Zip code: <c:out value="${thisLease.zipcode}"></c:out>
 						</li>
 					</ul>
 				</div>
-
-				<c:if test="${userId == thisLease.usersId }">
-					<div class="container">
-						<form:form action="/lease/delete/${thisLease.id}" class="form"
-							method="post">
-							<input type="hidden" name="_method" value="post" />
-
-							<div class="form-row">
-								<input type="submit" value="Delete" class="btn-primary" />
-							</div>
-						</form:form>
-
-					</div>
-
-					<div class="container">
-						<form:form action="/lease/${thisLease.id}/edit" class="form"
-							method="put">
-							<input type="hidden" name="_method" value="put" />
-
-							<div class="form-row">
-								<input type="submit" value="edit lease" class="btn-primary" />
-							</div>
-						</form:form>
-					</div>
-				</c:if>
 
 				<c:if test="${userId != thisLease.usersId}">
 					<div class="bookHuntContainer">
@@ -97,18 +71,20 @@
 											value="${thisLease.usersId}" />
 									</div>
 
-									<div class="startDate">
-										<form:label path="startDate">Start date:</form:label>
-										<form:errors path="startDate" class="test-danger" />
-										<form:input path="startDate" type="date" />
-									</div>
+									<ul class="list-group ">
+										<li class="list-group-item m-2 p-2">
+											<form:label path="startDate">Start date:</form:label>
+											<form:errors path="startDate" class="test-danger" />
+											<form:input path="startDate" type="date" />
+										</li>
 
 
-									<div class="endDate">
-										<form:label path="endDate">End date:</form:label>
-										<form:errors path="endDate" class="test-danger" />
-										<form:input path="endDate" type="date" />
-									</div>
+										<li class="list-group-item m-2 p-2">
+											<form:label path="endDate">End date:</form:label>
+											<form:errors path="endDate" class="test-danger" />
+											<form:input path="endDate" type="date" />
+										</li>
+									</ul>
 
 									<div class="confirmContainer">
 
@@ -126,16 +102,41 @@
 									</div>
 
 									<div class="submitButton">
-										<input class="button btn btn-success" type="submit"
+										<input class="button btn btn-success m-2 p-2 justify-text-center" type="submit"
 											value="Review booking" />
 									</div>
 								</div>
 							</form:form>
 						</div>
 					</div>
-
 				</c:if>
 			</div>
+			
+			<c:if test="${userId == thisLease.usersId }">
+				<div class="container">
+					<form:form action="/lease/delete/${thisLease.id}" class="form"
+						method="post">
+						<input type="hidden" name="_method" value="post"  />
+
+						<div class="form-row">
+							<input type="submit" value="Delete" class="btn btn-danger m-2 p-2" />
+						</div>
+					</form:form>
+
+				</div>
+
+				<div class="container">
+					<form:form action="/lease/${thisLease.id}/edit" class="form"
+						method="put">
+						<input type="hidden" name="_method" value="put" />
+
+						<div class="form-row">
+							<input type="submit" value="edit lease" class="btn btn-success m-2 p-2" />
+						</div>
+					</form:form>
+				</div>
+			</c:if>
+
 		</div>
 	</div>
 </body>

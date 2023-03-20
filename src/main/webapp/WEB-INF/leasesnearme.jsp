@@ -41,46 +41,42 @@
 		<a href="/profile/edit" class="btn btn-success">Edit profile</a>
 		<a href="/logout" class="btn btn-success">Logout</a>
 	</div>
-	
-	
+
+
 	<div id="allhuntingleases" class="allHuntingLeases">
-			
-			<h2> All leases </h2>
-			<c:forEach var="thisLease" items="${leasesNearMe}">
-				<ul class="leaseCard">
-		    		<li>
-		    			<a href="/lease/${thisLease.id}"><c:out value="${thisLease.title}"/></a>
-		    		</li>
-		       	
-		       		<li>
-		       			<c:out value="${thisLease.game}"/>
-		       		
-		        	</li>	
-		        
-		        	<li>
-		       			<c:out value="${thisLease.rate}"/>
-		       		</li>
-		       	<!-- 
-		       	
-		       	TODO: Delete before production: acessPoints will have to be own class
-		       	Hunts will have a list of acessPoint classes
-		       	
-		       	-->
-		       		<li>
-		       			<c:out value="${thisLease.accessPoints}"/>
-		       		</li>
-		       	
-		       		<li>
-		       			<c:out value="${thisLease.blinds}"/>
-		       		</li>
-		       	
-		       		<li>
-		       			<c:out value="${thisLease.stands}"/>
-		       		</li>	
-		    	</ul>
-			</c:forEach>
-			
+		<div class="row justify-content-center">
+			<div class="col-4 ">
+				<h2>
+					All leases near
+					<c:out value="${usersZipcode}" />
+				</h2>
+				<c:forEach var="thisLease" items="${leasesNearMe}">
+					<div class="card m-2 p-2">
+					<ul class="list-group">
+						<li class="list-group-item m-2 p-2">
+						<c:out value="${thisLease.title}" /></li>
+
+						<li class="list-group-item m-2 p-2"><c:out
+								value="${thisLease.game}" /></li>
+
+						<li class="list-group-item m-2 p-2"><c:out
+								value="${thisLease.rate}" /></li>
+						<li class="list-group-item m-2 p-2"><c:out
+								value="${thisLease.accessPoints}" /></li>
+
+						<li class="list-group-item m-2 p-2"><c:out
+								value="${thisLease.blinds}" /></li>
+
+						<li class="list-group-item m-2 p-2"><c:out
+								value="${thisLease.stands}" /></li>
+					<a href="/lease/${thisLease.id}" class="btn btn-primary">View lease</a>
+					</ul>
+					</div>
+				</c:forEach>
+
+			</div>
 		</div>
-	
-	</body>
+		</div>
+
+</body>
 </html>

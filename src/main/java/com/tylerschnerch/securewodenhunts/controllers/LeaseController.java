@@ -103,12 +103,11 @@ public class LeaseController {
     	if (session.getAttribute("userId") == null) {
     		return "redirect:/logout";
     	}
-				
+		
     	username = principal.getName();
-    	System.out.println(username);
     	Integer userId = (Integer) session.getAttribute("userId");
 		User theUser =  userService.findByUsername(username);
-		System.out.println(theUser);
+		
     	model.addAttribute("user",theUser);
     	
     	List <Lease> myleases = leaseService.allUserLeasesById(userId);
@@ -120,19 +119,19 @@ public class LeaseController {
     @GetMapping("/near/{zipcode}")
     public String leasesNearMe(@PathVariable("zipcode") String zipcode, Model model, HttpSession session, 
     		String username,  Principal principal) {
-    	System.out.println("A");
+    	
     	username = principal.getName();
-    	System.out.println("B");
+    	
     	User theUser =  userService.findByUsername(username);
-    	System.out.println("C");
+    	
     	String usersZipcode = theUser.getZipcode();
-    	System.out.println("D");
+    	
     	List <Lease> leasesNearZip = leaseService.allZipsLeases(usersZipcode );  
-    	System.out.println("E");
+    	
     	model.addAttribute("leasesNearMe", leasesNearZip);
-    	System.out.println("F");
+    	
     	model.addAttribute("usersZipcode", usersZipcode);
-    	System.out.println("G");
+    	
     	return"leasesnearme.jsp";
     }
 
