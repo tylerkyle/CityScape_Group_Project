@@ -5,32 +5,27 @@
 <!-- New line below to use form tag -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!-- New line below to use errors tag -->
-<%@ page isErrorPage="true" %>
+<%@ page isErrorPage="true" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/leasenearme.css">
-<meta charset="ISO-8859-1">
-<title>Woden Hunts: Leases near me</title>
+<link rel="stylesheet" type="text/css" href="/css/editlease.css">
+<title>Edit lease</title>
 </head>
 <body>
-	<div class="w-max" id="headingcontainer">
+<div class="w-max" id="headingcontainer">
 		<div id="titlecontainer">
 			<h1
 				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
-				id="title">Instantly book hunting leases</h1>
+				id="titleheading">Instantly book hunting leases</h1>
 		</div>
 
 		
 		<div
 			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
 			id="navbar">
-			<c:forEach var="thisUsersRole" items="${user.roles}">
-			<c:if test="${thisUsersRole.id == 1}">
-				<a href="/admin/super" class="btn btn-success m-2 p-2" id="leasenearlink">Super admin panel</a>
-			</c:if>
-			</c:forEach>
+			<!-- TODO: Delete before production: Needs to generate query -->
 			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
 			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
 				Hunting leases near you</a> <a href="/lease/myleases"
@@ -40,43 +35,41 @@
 			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
 		</div>
 	</div>
+	
+	
+	
 
+	
+	<div class="container-fluid justify-content-center">	
+	<div class="row justify-content-center d-flex flex-wrap">
+	<div class="col-3 m-3 p-3">
 
-
-	<div id="allhuntingleases" class="allHuntingLeases">
-		<div class="row justify-content-center">
-			<div class="col-4 ">
-				<h2>
-					All leases near
-					<c:out value="${usersZipcode}" />
-				</h2>
-				<c:forEach var="thisLease" items="${leasesNearMe}">
-					<div class="card m-2 p-2">
-					<ul class="list-group">
-						<li class="list-group-item m-2 p-2">
-						<c:out value="${thisLease.title}" /></li>
-
-						<li class="list-group-item m-2 p-2"><c:out
-								value="${thisLease.game}" /></li>
-
-						<li class="list-group-item m-2 p-2"><c:out
-								value="${thisLease.rate}" /></li>
-						<li class="list-group-item m-2 p-2"><c:out
-								value="${thisLease.accessPoints}" /></li>
-
-						<li class="list-group-item m-2 p-2"><c:out
-								value="${thisLease.blinds}" /></li>
-
-						<li class="list-group-item m-2 p-2"><c:out
-								value="${thisLease.stands}" /></li>
-					<a href="/lease/${thisLease.id}" class="btn btn-primary" id="viewleasebutton">View lease</a>
-					</ul>
-					</div>
-				</c:forEach>
-
+				<form:form action="/admin/super/update/hunt/${thisHunt.id}" method="post" modelAttribute="blankHunt">
+					<input type="hidden" name="_method" value="PUT"/>
+					<div>
+				<form:label path="startDate">Start date: </form:label><br />
+				<form:errors path="startDate" class="text-danger"/>
+				<form:input path="startDate" value="${thisHunt.startDate }"/>
 			</div>
-		</div>
-		</div>
+			
+			<div>
+				<form:label path="endDate">End date:: </form:label><br />
+				<form:errors path="endDate" class="text-danger"/>
+				<form:input path="endDate" value="${thisHunt.endDate }"/>
+			</div>
 
+
+	
+			<div>
+				<input class="button btn btn-success m-1 p-1" type="submit" value="Update hunt details"/>
+			</div>
+	</form:form>
+	</div>
+	</div>
+	</div>
+	
+	<div>
+	</div>
+	
 </body>
 </html>

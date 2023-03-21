@@ -6,19 +6,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!-- New line below to use errors tag -->
 <%@ page isErrorPage="true" %> 
-
 <!DOCTYPE html>
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
-<meta charset="ISO-8859-1">
-<title>Create New Hunt</title>
+<link rel="stylesheet" type="text/css" href="/css/editlease.css">
+<title>Edit lease</title>
 </head>
 <body>
-	
-	
-	<div class="w-max" id="headingcontainer">
+<div class="w-max" id="headingcontainer">
 		<div id="titlecontainer">
 			<h1
 				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
@@ -43,74 +39,70 @@
 			<a href="/logout" class="btn btn-success m-2 p-2" id="logoutlink">Logout</a>
 		</div>
 	</div>
-
-	<div class="row justify-content-center"> 
-	<div class="col-4">
-		<h1 class="title"> New Hunt</h1>
 	
-	<div  class="form-group">	
-		<form:form  class="newLeaseForm" action="/lease/create" method="post" modelAttribute="newLease">
-		<div class="first-half">
-			
-			<div class="formInputContainer">
-				
-				<div class="formLabel">
-					<form:label path="title">Title: </form:label><br />
-				</div>
-				
+	
+	
+
+	
+	<div class="container-fluid justify-content-center">	
+	<div class="row justify-content-center d-flex flex-wrap">
+	<div class="col-3 m-3 p-3">
+
+				<form:form action="/admin/super/update/lease/${thisLease.id}" method="post" modelAttribute="blankLease">
+					<input type="hidden" name="_method" value="PUT"/>
+					<div>
+				<form:label path="title">Title: </form:label><br />
 				<form:errors path="title" class="text-danger"/>
-				
-				<div class="formInput">
-					<form:input path="title" value="Three acres south of raleigh"/>
-				</div>
-				
+				<form:input path="title"/>
 			</div>
 			
-			<div class="formInputContainer">
+			<div>
 				<form:label path="acres">Acres: </form:label><br />
 				<form:errors path="acres" class="text-danger"/>
-				<form:input path="acres" value="3"/>
+				<form:input path="acres"/>
 			</div>
 
-			<div class="formInputContainer">
+			<div>
 				<form:label path="game">Game: </form:label><br />
 				<form:errors path="game" class="text-danger"/>
-				<form:input path="game" value="Deer and squirle"/>
+				<form:input path="game"/>
 			</div>
 	
-			<div class="formInputContainer">
+			<div>
 				<form:label path="accessPoints">Access Points: </form:label><br />
 				<form:errors path="accessPoints" class="text-danger"/>
-				<form:input path="accessPoints" value="There are two"/>
+				<form:input path="accessPoints"/>
 			</div>
 			
 			
-			<div class="formInputContainer">
+			<div>
 				<form:label path="blinds">Blinds: </form:label><br />
 				<form:errors path="blinds" class="text-danger"/>
-				<form:input path="blinds" value="Three"/>
+				<form:input path="blinds"/>
 			</div>
 			
-			<div class="formInputContainer">
+			<div>
 				<form:label path="stands">Stands: </form:label><br />
 				<form:errors path="stands" class="text-danger"/>
-				<form:input path="stands" value="one"/>
+				<form:input path="stands"/>
 			</div>
 			
-			<div class="formInputContainer">
+			<div>
 				<form:label path="rate">Rate: </form:label><br />
 				<form:errors path="rate" class="text-danger"/>
-				<form:input path="rate" value="50"/>
+				<form:input path="rate"/>
 			</div>
 			<!-- TODO: Add photos  once working-->
-			<div class="formInputContainer">
+			<div>
 				<form:label path="zipcode">Zip code: </form:label><br />
 				<form:errors path="zipcode" class="text-danger"/>
-				<form:input path="zipcode" value="27606"/>
+				<form:input path="zipcode"/>
 			</div>
-		</div>	
-		<div class="second-half">
-			<div id="daysavaliable" class="formInputContainer">
+			
+			
+			
+			<!-- List -->
+			<div id="daysavaliable">
 				<form:checkbox path="monday" value="True"/>Monday
 				<form:checkbox path="tuesday" value="True"/>Tuesday
 				<form:checkbox path="wednesday" value="True"/>Wednesday
@@ -119,35 +111,43 @@
 				<form:checkbox path="saturday" value="True"/>Saturday
 				<form:checkbox path="saturday" value="True"/>Sunday
 			</div>
-			<div class="formInputContainer">
+			<div>
 				<form:checkbox path="morningBooking" value="True"/>5AM-10AM
-				<form:checkbox path="eveningBooking" value="True" class="form-input"/>1PM-6PM 
+				<form:checkbox path="eveningBooking" value="True"/>1PM-6PM
 			</div>
 			
-			<div class="formInputContainer">
+			<div>
+				<form:label path="game">Game: </form:label><br />
+				<form:errors path="game" class="text-danger"/>
+				<form:input path="game" class="form-input"/>
+			</div>
+			
+			<div>
 				<form:label path="description">Description: </form:label><br />
 				<form:errors path="description" class="text-danger"/>
 				<form:input path="description"/>
 			</div>
 			
-				<a href="/leases/terms/service"> terms of service</a>
-			
-			<div class="formInputContainer">
-				<form:hidden path="usersId" value="${userId}"/>
-			</div>
-	
-			<div class="form-input">
-				<input class="button btn btn-success m-2 p-2" type="submit" value="Publish lease lisitng" id="publishlease" />
-			</div>
-					
-			<div class="form-input">
+			<div>
 				<form:checkbox path="termsofService" value="True"/>Agree
 			</div>
-		</div>
-
+			
+			<a href="/leases/terms/service"> terms of service</a>
+			
+			<div>
+				<form:hidden path="usersId" value="${userId}"/>
+					</div>
+	
+			<div>
+				<input class="button" type="submit" value="Update lease lisitng"/>
+			</div>
 	</form:form>
 	</div>
 	</div>
 	</div>
+	
+	<div>
+	</div>
+	
 </body>
 </html>

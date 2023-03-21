@@ -10,7 +10,11 @@
 	margin-left:0 !Important;
 	margin-right:0 !Important;	
 }
-#title{
+#yourhuntslink{
+	background-color:#Bdce06 !Important;
+	border: solid 2px black;
+}
+#titleheading{
 margin-bottom:0;
 color: white;
 	}

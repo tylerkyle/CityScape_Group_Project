@@ -25,7 +25,11 @@
 		<div
 			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
 			id="navbar">
-			<!-- TODO: Delete before production: Needs to generate query -->
+			<c:forEach var="thisUsersRole" items="${user.roles}">
+			<c:if test="${thisUsersRole.id == 1}">
+				<a href="/admin/super" class="btn btn-success m-2 p-2" id="leasenearlink">Super admin panel</a>
+			</c:if>
+			</c:forEach>
 			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
 			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
 				Hunting leases near you</a> <a href="/lease/myleases"
@@ -39,7 +43,7 @@
 	<div class="container-fluid">
 		<div class="row justify-content-center m-2 p-2">
 			<div class="col-4 m-2 p-2 ">
-				<div id="allhuntingleases" class="allHuntingLeases m-2 p-2">
+				<div id="allhuntingleases" class="allHuntingLeases m-2 p-2 ">
 
 					<h2>Manage your hunting leases</h2>
 					<c:forEach var="thisLease" items="${myLeases}">
@@ -51,12 +55,7 @@
 									<li><c:out value="Game types: ${thisLease.game}" /></li>
 
 									<li><c:out value="Daily rate: ${thisLease.rate}" /></li>
-									<!-- 
-		       	
-		       	TODO: Delete before production: acessPoints will have to be own class
-		       	Hunts will have a list of acessPoint classes
-		       	
-		       	-->
+	
 									<li><c:out value="Access points: ${thisLease.accessPoints}" /></li>
 
 									<li><c:out value="Blinds: ${thisLease.blinds}" /></li>

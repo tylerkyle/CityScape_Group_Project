@@ -26,7 +26,11 @@
 		<div
 			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
 			id="navbar">
-			<!-- TODO: Delete before production: Needs to generate query -->
+			<c:forEach var="thisUsersRole" items="${user.roles}">
+			<c:if test="${thisUsersRole.id == 1}">
+				<a href="/admin/super" class="btn btn-success m-2 p-2" id="leasenearlink">Super admin panel</a>
+			</c:if>
+			</c:forEach>
 			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
 			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
 				Hunting leases near you</a> <a href="/lease/myleases"

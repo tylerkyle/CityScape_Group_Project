@@ -17,7 +17,7 @@ public interface LeaseRepository extends CrudRepository <Lease, Integer> {
 	    void deleteById(Integer id);
 	    //Long saveById(String thisBookId);
 	    
-	    Long save(Integer id);
+	    Integer save(Integer id);
 	    //Long save(Long id);
 	    
 	    List<Lease> findByUsersId(Integer userId);

@@ -26,7 +26,11 @@
 		<div
 			class=" navigationbar links navbarlinks navbar navbar-expand-lg navbar-light bg-light justify-content-evenly justify-text-center w-auto "
 			id="navbar">
-			<!-- TODO: Delete before production: Needs to generate query -->
+			<c:forEach var="thisUsersRole" items="${user.roles}">
+			<c:if test="${thisUsersRole.id == 1}">
+				<a href="/admin/super" class="btn btn-success m-2 p-2" id="leasenearlink">Super admin panel</a>
+			</c:if>
+			</c:forEach>
 			<a href="/lease/all" class="btn btn-success m-2 p-2" id="allleases">All leases</a>
 			<a href="/lease/near/${user.zipcode}" class="btn btn-success m-2 p-2 " id="leasenearlink">
 				Hunting leases near you</a> <a href="/lease/myleases"
@@ -48,13 +52,21 @@
 				</h2>
 				<c:forEach var="thisUser" items="${allUsers}">
 					<div class="card m-2 p-2">
-					<ul class="list-group">
-						<li class="list-group-item m-2 p-2">
-						<c:out value="${thisUser.username}" /></li>
+						<ul class="list-group">
+							<li class="list-group-item m-2 p-2"><c:out
+									value="${thisUser.username}" /></li>
+							<div class="container">
+								<form:form action="/admin/super/delete/user/${thisUser.id}"
+									class="form" method="post">
+									<input type="hidden" name="_method" value="post" />
 
-					<a href="/delete/${thisUser.id}" class="btn btn-danger m-1 p-1" id="deleteuserbutton">Delete user</a>
-					<a href="/edit/${thisUser.id}" class="btn btn-success m-1 p-1" id="edituserbutton">Edit user</a>
-					</ul>
+									<div class="form-row">
+										<input type="submit" value="Delete user"
+											class="btn btn-danger m-2 p-2" id="submit" />
+									</div>
+								</form:form>
+							</div>
+						</ul>
 					</div>
 				</c:forEach>
 
@@ -72,8 +84,19 @@
 						<li class="list-group-item m-2 p-2">
 						<c:out value="${thisLease.title}" /></li>
 
-					<a href="/delete/${thisUser.id}" class="btn btn-danger m-1 p-1" id="deleteuserbutton">Delete user</a>
-					<a href="/edit/${thisUser.id}" class="btn btn-success m-1 p-1" id="edituserbutton">Edit user</a>
+					<div class="container">
+								<form:form action="/admin/super/delete/lease/${thisLease.id}" class="form"
+									method="post">
+									<input type="hidden" name="_method" value="post" />
+
+									<div class="form-row">
+										<input type="submit" value="Delete lease"
+											class="btn btn-danger m-2 p-2" id="submit" />
+									</div>
+								</form:form>
+
+							</div>
+					<a href="/admin/super/edit/lease/${thisLease.id}" class="btn btn-success m-1 p-1" id="edituserbutton">Edit lease</a>
 					</ul>
 					</div>
 				</c:forEach>
@@ -83,7 +106,7 @@
 		
 			<div class="col-3 justify-content-center justify-text-center m-2 p-1">
 				<h2 class="m-1 p-1">
-					Manage users
+					Manage hunts
 					
 				</h2>
 				<c:forEach var="thisHunt" items="${allHunts}">
@@ -94,8 +117,19 @@
 						<li class="list-group-item m-2 p-2">
 						<c:out value="${thisHunt.endDate}" /></li>
 
-					<a href="/super/admin/delete/${thisHunt.id}" class="btn btn-danger m-1 p-1" id="deleteuserbutton">Delete hunt</a>
-					<a href="super/admin/edit/${thisHunt.id}" class="btn btn-success m-1 p-1" id="edituserbutton">Edit hunt</a>
+					<div class="container">
+								<form:form action="/admin/super/delete/hunt/${thisHunt.id}" class="form"
+									method="post">
+									<input type="hidden" name="_method" value="post" />
+
+									<div class="form-row">
+										<input type="submit" value="Delete hunt"
+											class="btn btn-danger m-2 p-2" id="submit" />
+									</div>
+								</form:form>
+
+							</div>
+					<a href="/admin/super/edit/hunt/${thisHunt.id}" class="btn btn-success m-1 p-1" id="edituserbutton">Edit hunt</a>
 					</ul>
 					</div>
 				</c:forEach>

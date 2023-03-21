@@ -1,6 +1,7 @@
 package com.tylerschnerch.securewodenhunts.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,6 +17,7 @@ public interface HuntRepository extends CrudRepository <Hunt, Integer> {
 	    void deleteById(Integer id);
 	    //Long saveById(String thisBookId);
 	    List<Hunt> findByUserId(Integer id);
+	    Optional<Hunt> findById(Integer id);
 	    
 	    Integer save(Integer id);
 	    //Long save(Long id);

@@ -18,7 +18,7 @@
 		<div id="titlecontainer">
 			<h1
 				class="title d-flex justify-content-center justify-text-center w-auto font-weight-bold p-3"
-				id="title">Instantly book hunting leases</h1>
+				id="titleheading">Instantly book hunting leases</h1>
 		</div>
 
 		

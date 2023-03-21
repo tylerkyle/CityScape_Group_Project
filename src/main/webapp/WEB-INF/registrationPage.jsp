@@ -7,40 +7,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/leaseDashboard.css">
+<link rel="stylesheet" type="text/css" href="/css/login.css">
 <title>Registration Page</title>
 </head>
-<body>
-    <h1>Register!</h1>
+<body id="bodycontainer">
+    <div class="row justify-content-center">
+    <h1 calss="col-12 m-2 p-2 " id="catchline">
+    	Woden Hunts: Instantly Book or list a Hunting leases
+    </h1>
+    <div class="col-4 m-2 p-2">
+    <h2 id="register">Register!</h2>
     
     <p><form:errors path="user.*"/></p>
     
-    <form:form method="POST" action="/registration" modelAttribute="user">
+    <form:form method="POST" action="/registration" modelAttribute="user" class="  m-2 p-2">
         
-        <p>
-            <form:label path="username">Username:</form:label>
-            <form:input path="username"/>
-        </p>
-        
-        <p>
-            <form:label path="email">Email address:</form:label>
-            <form:input path="email"/>
+        <p class="form-group">
+            <form:label path="username">  <span id="usernamespan">Username:</span> </form:label>
+            <form:input path="username" class="m-1 p-1 rounded-3"/>
         </p>
         
         <p>
-            <form:label path="zipcode">Zipcode:</form:label>
-            <form:input path="zipcode"/>
+            <form:label path="email" id="emailaddress">Email address:</form:label>
+            <form:input path="email" class="m-1 p-1 rounded-3"/>
         </p>
         
         <p>
-            <form:label path="password">Password:</form:label>
-            <form:password path="password"/>
+            <form:label path="zipcode" id="userzipcode" >Zipcode:</form:label>
+            <form:input path="zipcode" class="m-1 p-1 rounded-3"/>
+        </p>
+        
+        <p>
+            <form:label path="password" ><span id="passwordspan">Password:</span></form:label>
+            <form:password path="password" class="m-1 p-1 rounded-3"/>
         </p>
         <p>
-            <form:label path="passwordConfirmation">Password Confirmation:</form:label>
-            <form:password path="passwordConfirmation"/>
+            <form:label path="passwordConfirmation" id="pwconfirm">Password Confirmation:</form:label>
+            <form:password path="passwordConfirmation" class="m-1 p-1 rounded-3"/>
         </p>
-        <input type="submit" value="Register!"/>
+        <input type="submit" value="Register!"  class="btn btn-primary w-max "id="registerupbutton"/>
     </form:form>
+    
+    <p class="m-2 p-2" id="tagline"> Already have an account?</p>
+    <a href="login" class="btn btn-primary w-max" class="m-2 p-2" id="signupbutton">Login in</a>
+    </div>
+    </div>
 </body>
 </html>
