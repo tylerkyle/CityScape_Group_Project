@@ -23,7 +23,7 @@
 
 
 			<div class="col-9 m-2 p-2">
-				<h1 id="catchline">Woden Hunts: Instantly Book or list a Hunting leases</h1>
+				<h1 id="catchline">CityScape: Find activities in your city</h1>
 			</div>
 			<div class="col-4 m-1 p-1">
 			<h2 class="m-1 p-1" id="login">Login</h2>
