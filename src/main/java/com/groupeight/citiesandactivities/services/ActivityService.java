@@ -30,7 +30,10 @@ public class ActivityService {
 	public Activity createActivity(Activity activity) {
 		return activityRepository.save(activity);
 	}
-
+	
+	public List<Activity> findByCityId(Long id) {
+		return activityRepository.findByCityId(id);
+	}
 	// retrieves a activities
 	public Activity findActivity(Long id) {
 		Optional<Activity> optionalActivity = activityRepository.findById(id);

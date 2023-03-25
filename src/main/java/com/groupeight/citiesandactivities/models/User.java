@@ -24,7 +24,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Long id;
 
 	@Size(min = 3)
 	private String username;
@@ -64,11 +64,11 @@ public class User {
 		this.updatedAt = new Date();
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
