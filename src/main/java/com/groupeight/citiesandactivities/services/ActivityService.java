@@ -3,9 +3,11 @@ package com.groupeight.citiesandactivities.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.groupeight.citiesandactivities.models.Activity;
 import com.groupeight.citiesandactivities.repositories.ActivityRepository;
-
+@Service
 public class ActivityService {
 
 	private final ActivityRepository activityRepository;

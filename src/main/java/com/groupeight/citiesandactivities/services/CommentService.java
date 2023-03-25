@@ -3,9 +3,11 @@ package com.groupeight.citiesandactivities.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.groupeight.citiesandactivities.models.Comment;
 import com.groupeight.citiesandactivities.repositories.CommentRepository;
-
+@Service
 public class CommentService {
 	private final CommentRepository commentRepository;
 
