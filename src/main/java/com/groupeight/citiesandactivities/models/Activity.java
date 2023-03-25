@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "activities")
@@ -25,11 +27,19 @@ public class Activity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
 	private Long id;
+	@NotNull
+	@Size(min = 3, max = 100)
 	private String name;
+	@NotNull
+	@Size(min = 1, max = 5)
 	private String price;
+	@NotNull
 	private String description;
+	@NotNull
 	private Date createdAt;
+	@NotNull
 	private Date updatedAt;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

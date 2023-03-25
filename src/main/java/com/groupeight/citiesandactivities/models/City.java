@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "cities")
@@ -25,11 +27,17 @@ public class City {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
 	private Long id;
+	@NotNull
+	@Size(min = 3,max = 100)
 	private String name;
+	@NotNull
 	private Date createdAt;
+	@NotNull
 	private Date updatedAt;
-
+	
+	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;

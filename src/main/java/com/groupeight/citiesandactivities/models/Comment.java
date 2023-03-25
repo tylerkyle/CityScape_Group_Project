@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "comments")
@@ -22,9 +24,14 @@ public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
 	private Long id;
+	@NotNull
+	@Size(min = 1, max = 250)
 	private String body;
+	@NotNull
 	private Date createdAt;
+	@NotNull
 	private Date updatedAt;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +51,7 @@ public class Comment {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
