@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.groupeight.citiesandactivities.models.Activity;
-import com.groupeight.citiesandactivities.models.City;
 import com.groupeight.citiesandactivities.models.User;
 import com.groupeight.citiesandactivities.services.ActivityService;
 import com.groupeight.citiesandactivities.services.CityService;
+import com.groupeight.citiesandactivities.services.CommentService;
 import com.groupeight.citiesandactivities.services.UserService;
 
 @Controller
@@ -30,6 +30,8 @@ public class ActivityController {
 	ActivityService activityService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	CommentService commentService;
 
 	@RequestMapping("city/{cityId}/acitivity/{acitivityId}")
 	private String oneOfACitysActivities(@PathVariable("cityId") Long cityId,
@@ -37,7 +39,7 @@ public class ActivityController {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
-
+		model.addAttribute("activitysComments", commentService.allActivitiesCommentsByActivityId(activityId));
 		model.addAttribute("citysActivities", activityService.findByCityId(cityId));
 
 		return "oneOfACitiesActivities.jsp";
@@ -113,7 +115,7 @@ public class ActivityController {
 
 	}
 
-	//TODO: Need to figure out better redirect
+	// TODO: Need to figure out better redirect
 	@PutMapping("activity/{id}")
 	private String updateActivityById(@PathVariable("id") Long id, @ModelAttribute("thisActivity") Model model,
 			HttpSession session, BindingResult result, Activity activity) {
