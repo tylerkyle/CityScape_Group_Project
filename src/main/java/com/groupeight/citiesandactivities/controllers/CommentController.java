@@ -78,5 +78,15 @@ public class CommentController {
 			return "redirect:/all/cities";
 		}
 	}
+	@PostMapping("comment/delete/{id}")
+	public String deleteComment(@PathVariable("id") Long id, HttpSession session) {
+
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+
+		commentService.deleteComment(id);
+		return "redirect:/all/cities";
+	}
 
 }
