@@ -78,6 +78,7 @@ public class CommentController {
 			return "redirect:/all/cities";
 		}
 	}
+
 	@PostMapping("comment/delete/{id}")
 	public String deleteComment(@PathVariable("id") Long id, HttpSession session) {
 

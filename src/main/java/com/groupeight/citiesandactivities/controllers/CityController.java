@@ -39,7 +39,28 @@ public class CityController {
 
 		return "viewCity.jsp";
 	}
+	
+	@RequestMapping("city/add")
+	private String newCity(@PathVariable("id") @ModelAttribute("thisCity") Model model, City city,
+			HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+		model.addAttribute("thisCity", city);
 
+		return "addCity.jsp";
+	}
+	
+	@RequestMapping("city/edit/{id}")
+	private String editCityById(@PathVariable("id") Long id, @ModelAttribute("thisCity") Model model,
+			HttpSession session, BindingResult result, City city) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+		model.addAttribute("thisCity", cityService.findCity(id));
+		return "editCity.jsp";
+	}
+	
 	@PutMapping("city/{id}")
 	private String updateCityById(@PathVariable("id") Long id, @ModelAttribute("thisCity") Model model,
 			HttpSession session, BindingResult result, City city) {

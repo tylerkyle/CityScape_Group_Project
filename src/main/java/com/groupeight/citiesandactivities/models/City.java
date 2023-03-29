@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Table(name = "cities")
 public class City {
@@ -30,13 +32,20 @@ public class City {
 	@NotNull
 	private Long id;
 	@NotNull
-	@Size(min = 3,max = 100)
+	@Size(min = 3, max = 100)
 	private String name;
+	@NotNull
+	@Range(min = 0, max = 5)
+	private Float stars;
+	@NotNull
+	@Size(min = 10, max = 250)
+	private String reviews;
+
 	@NotNull
 	private Date createdAt;
 	@NotNull
 	private Date updatedAt;
-	
+
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
@@ -101,6 +110,22 @@ public class City {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Float getStars() {
+		return stars;
+	}
+
+	public void setStars(Float stars) {
+		this.stars = stars;
+	}
+
+	public String getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(String reviews) {
+		this.reviews = reviews;
 	}
 
 }
