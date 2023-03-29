@@ -28,6 +28,27 @@
 	justify-content: center;
 }
 
+#actcontainer {
+	margin: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#new-form {
+	border: 2px solid black;
+	padding: 1em;
+}
+
+.div-form {
+	margin: 0.5em;
+}
+
+.act-label {
+	width: 100px;
+	vertical-align: top;
+}
+
 table, th, td {
 	text-align: center;
 	border: 2px solid black;

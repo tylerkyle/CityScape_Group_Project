@@ -14,8 +14,8 @@
 		<h3>CityScape</h3>
 		<div id="div-menu">
 			<a href="${pageContext.servletContext.contextPath}/dashboard"><button class="menu-btn">Home</button></a>
-			<a href="${pageContext.servletContext.contextPath}/review"><button class="menu-btn">New Activity</button></a>
 			<a href="${pageContext.servletContext.contextPath}/newCity"><button class="menu-btn">New City</button></a>
+			<a href="${pageContext.servletContext.contextPath}/newActivity"><button class="menu-btn">Add Activity</button></a>
 			<a href="${pageContext.servletContext.contextPath}/chatgpt"><button class="menu-btn">Need Recommendations?</button></a>
 		</div>
 		<div>
@@ -28,23 +28,17 @@
 				<tr>
 					<th>Cities</th>
 					<th>Stars</th>
-					<th>Reviews</th>
 					<th>Activities</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>San Francisco</td>
-					<td>5 Stars</td>
-					<td>Best City</td>
-					<td>No Activities Yet</td>
-				</tr>
-				<tr>
-					<td>New York</td>
-					<td>4 Stars</td>
-					<td>Too Expensive</td>
-					<td>One Activity</td>
-				</tr>
+				<c:forEach var="city" items="cities">
+					<tr>
+						<td>"${city.name}"</td>
+						<td>"${city.star}" Star</td>
+						<td>"${city.activities}"</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>

@@ -93,6 +93,18 @@ public class HomeController {
 		
 		return "dashboardPage.jsp";
 	}
+	
+	@GetMapping("/newActivity")
+	public String newActivity(Model model, HttpSession session) {
+		
+		return "AddActivity.jsp";
+	}
+	
+	@GetMapping("/newCity")
+	public String newCity(Model model, HttpSession session) {
+		
+		return "add_city_draft_1.jsp";
+	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
