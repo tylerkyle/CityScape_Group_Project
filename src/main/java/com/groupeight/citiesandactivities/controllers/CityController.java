@@ -48,6 +48,7 @@ public class CityController {
 			return "redirect:/logout";
 		}
 
+			model.addAttribute("city", newCity);
 		return "addCity.jsp";
 	}
 	
