@@ -26,21 +26,27 @@
         	background-color: #EEEDE7}
 	</style>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
-	<div class="header">		
-		<a class="btn btn-light" href="/dashboard" role="button">Home</a>
-		<a class="btn btn-light" href="/newCity" role="button">Add a New City</a>
-		<a class="btn btn-light" href="/newActivity" role="button">Add an Activity</a>
-		<a class="btn btn-light" href="/chatgpt" role="button">Need a Recommendation? (ChatGpt)</a>
-		<a class="btn btn-danger" href="/logout" role="button">Logout</a>
-	</div><p/><p/>
+<body id="bodycontainer">
+
+	<div id="header">
+		<h3>CityScape</h3>
+		<div id="div-menu">
+			<a href="${pageContext.servletContext.contextPath}/dashboard"><button class="menu-btn">Home</button></a>
+			<a href="${pageContext.servletContext.contextPath}/newCity"><button class="menu-btn">New City</button></a>
+			<a href="${pageContext.servletContext.contextPath}/newActivity"><button class="menu-btn">Add Activity</button></a>
+			<a href="${pageContext.servletContext.contextPath}/chatgpt"><button class="menu-btn">Need Recommendations?</button></a>
+		</div>
+		<div>
+			<button>Log Out</button>
+		</div>
+	</div>
 	
-	<div class="container">
-		<form:form action="/${thiscity.id}/edit" method="post" style="align-content:left" modelAttribute="thiscity">
+	<div class="maincontainer">
+		<form:form action="/city/${thiscity.id}" method="post" style="align-content:left" modelAttribute="thiscity">
             <input type="hidden" name="_method" value="put">
             
             <div class="form-group form-inline">
@@ -56,16 +62,9 @@
             </div><p/>
             
             <div class="form-group form-inline">
-                <form:label path="location">
-                	<form:errors path="location" class="text-danger"></form:errors>
-                	Location: <form:input path="location" type="text" class="form-control col-sm-3" style="margin-left: 20px" value="${thiscity.location}"/>
-                </form:label>   
-            </div><p/>
-            
-            <div class="form-group form-inline">
                 <form:label path="review">
                 	<form:errors path="review" class="text-danger"></form:errors>
-                	Review: <form:textarea path="review" class="form-control col-sm-3" style="margin-left: 20px" value="${thiscity.review}"/>
+                	Review: <form:textarea path="review" rows="20" cols="32" style="margin-left: 20px" value="${thiscity.review}"/>
                 </form:label>
             </div><p/>
             

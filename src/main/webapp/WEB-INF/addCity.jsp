@@ -9,37 +9,30 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Create a New City</title>
-	<style>
-		*{margin: 0px;
-			padding: 0px;
-			font-family:monospace;
-			color: black;}
-		.container {position: relative; 
-            margin: auto 25%;}
-		.header { position: relative; 
-            margin: auto 5%; 
-			width: auto;
-        	display: flex;
-        	flex-direction: row;
-        	align-items: center;
-        	justify-content: space-between;
-        	padding: 10px;
-        	background-color: #EEEDE7}
-	</style>
+
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
-	<div class="header">		
-		<a class="btn btn-light" href="/dashboard" role="button">Home</a>
-		<a class="btn btn-light" href="/chatgpt" role="button">Need a Recommendation? (ChatGpt)</a>
-		<a class="btn btn-danger" href="/logout" role="button">Logout</a>
-	</div><p/><p/>
+<body id="bodycontainer">
+
+	<div id="header">
+		<h3>CityScape</h3>
+		<div id="div-menu">
+			<a href="${pageContext.servletContext.contextPath}/dashboard"><button class="menu-btn">Home</button></a>
+			<a href="${pageContext.servletContext.contextPath}/newCity"><button class="menu-btn">New City</button></a>
+			<a href="${pageContext.servletContext.contextPath}/newActivity"><button class="menu-btn">Add Activity</button></a>
+			<a href="${pageContext.servletContext.contextPath}/chatgpt"><button class="menu-btn">Need Recommendations?</button></a>
+		</div>
+		<div>
+			<a href="${pageContext.servletContext.contextPath}/logout"><button class="menu-btn">Log Out</button></a>
+		</div>
+	</div>
 	
-	<div class="container">
-		<form:form action="/cities/new" method="post" style="align-content:left" modelAttribute="city">
+	<div class="maincontainer">
+		<form:form action="/city/new" id="new-form" method="post" style="align-content:left" modelAttribute="city">
+            
             <div class="form-group form-inline">
                 <form:errors path="user" class="text-danger"></form:errors>
                	<form:input path="user" type="hidden" value="${user.id}"></form:input>
@@ -53,16 +46,9 @@
             </div><p/>
             
             <div class="form-group form-inline">
-                <form:label path="location">
-                	<form:errors path="location" class="text-danger"></form:errors>
-                	Location: <form:input path="location" type="text" class="form-control col-sm-3" style="margin-left: 20px" placeholder="Enter the location.."/>
-                </form:label>   
-            </div><p/>
-            
-            <div class="form-group form-inline">
                 <form:label path="review">
                 	<form:errors path="review" class="text-danger"></form:errors>
-                	Review: <form:textarea path="description" class="form-control col-sm-3" style="margin-left: 20px" placeholder="Enter your review here..."/>
+                	Review: <form:textarea path="description" rows="20" cols="32" style="margin-left: 20px" placeholder="Enter your review here..."/>
                 </form:label>
             </div><p/>
             
