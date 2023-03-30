@@ -26,21 +26,22 @@
 		<table id="main-table">
 			<thead>
 				<tr>
-					<th>Cities</th>
-					<th>Stars</th>
-					<th>Activities</th>
+					<th onclick="sortTable(0)">Cities</th>
+					<th onclick="sortTable(1)">Stars</th>
+					<th onclick="sortTable(2)">Activities</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="city" items="cities">
 					<tr>
-						<td>"${city.name}"</td>
-						<td>"${city.star}" Star</td>
-						<td>"${city.activities}"</td>
+						<td><a href="${pageContext.servletContext.contextPath}/city/'${city.id}'">"${city.name}"</a></td>
+						<td>"${city.getStars()}" Stars</td>
+						<td><a href="${pageContext.servletContext.contextPath}/city/'${city.id}'/activities">"${city.getActivities().size()} Activities"</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+    <script src="/js/dashboard-script.js"></script>
 </body>
 </html>
