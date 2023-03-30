@@ -1,6 +1,7 @@
 package com.groupeight.citiesandactivities.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -15,7 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.groupeight.citiesandactivities.models.Activity;
+import com.groupeight.citiesandactivities.models.City;
 import com.groupeight.citiesandactivities.models.User;
+import com.groupeight.citiesandactivities.services.ActivityService;
+import com.groupeight.citiesandactivities.services.CityService;
 import com.groupeight.citiesandactivities.services.UserService;
 import com.groupeight.citiesandactivities.validator.UserValidator;
 
@@ -25,6 +30,14 @@ public class HomeController {
 	UserValidator userValidator;
 	@Autowired
 	UserService userService;
+	
+	private final CityService cityServ;
+	private final ActivityService activityServ;
+	
+	public HomeController (CityService cityServ, ActivityService activityServ) {
+		this.cityServ = cityServ;
+		this.activityServ = activityServ;
+	}
 
 	@RequestMapping(value = { "/" })
 	public String home(Principal principal, Model model, HttpSession session) {
@@ -43,8 +56,14 @@ public class HomeController {
 	}
 
 	@GetMapping("/home")
-	public String homePage(){
-		return "home.jsp";
+	public String homePage(Model model){
+		List<City> cities = cityServ.allCities();
+		List<Activity> activities = activityServ.allActivities();
+		
+		model.addAttribute("cities", cities);
+		model.addAttribute("activites", activities);
+		
+		return "dashboardPage.jsp";
 	}
 	
 	@RequestMapping("/registration")

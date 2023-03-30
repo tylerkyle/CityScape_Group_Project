@@ -19,13 +19,13 @@
 	<div id="header">
 		<h3>CityScape</h3>
 		<div id="div-menu">
-			<a href="${pageContext.servletContext.contextPath}/dashboard"><button class="menu-btn">Home</button></a>
-			<a href="${pageContext.servletContext.contextPath}/newCity"><button class="menu-btn">New City</button></a>
-			<a href="${pageContext.servletContext.contextPath}/newActivity"><button class="menu-btn">Add Activity</button></a>
+			<a href="${pageContext.servletContext.contextPath}/home"><button class="menu-btn">Home</button></a>
+			<a href="${pageContext.servletContext.contextPath}/city/add"><button class="menu-btn">New City</button></a>
+			<a href="${pageContext.servletContext.contextPath}/activity/add"><button class="menu-btn">Add Activity</button></a>
 			<a href="${pageContext.servletContext.contextPath}/chatgpt"><button class="menu-btn">Need Recommendations?</button></a>
 		</div>
 		<div>
-			<button>Log Out</button>
+			<a href="${pageContext.servletContext.contextPath}/logout"><button>Log Out</button></a>
 		</div>
 	</div>
 	<div id="actcontainer">
@@ -52,7 +52,7 @@
 				<div>
 					<input type="hidden" path="citi" value="${citi.id}"/>
 				</div>
-				<input type="submit" value="Add Activity"/>
+				<input type="submit" class="btn btn-primary" value="Add Activity"/>
 			</form:form>
 		</div>
 	</div>

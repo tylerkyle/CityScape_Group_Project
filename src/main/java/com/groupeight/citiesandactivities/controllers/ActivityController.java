@@ -3,6 +3,7 @@ package com.groupeight.citiesandactivities.controllers;
 import java.security.Principal;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,20 +98,30 @@ public class ActivityController {
 		return "newActivity.jsp";
 	}
 
+	@RequestMapping("activity/add")
+	private String newActivity (Model model, @ModelAttribute("activity") Activity newActivity,
+			HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+		
+		return "AddActivity.jsp";
+	}
+	
 	// TODO: Need to discuss a better redirect solution after creating activity
 	@PostMapping("activity/create")
-	private String createNewActivity(@ModelAttribute("thisActivity") Model model, HttpSession session,
-			BindingResult result, Activity activity) {
+	private String createNewActivity(@Valid @ModelAttribute("activity") Activity activity, HttpSession session,
+			BindingResult result, Model model) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
 		if (result.hasErrors()) {
 			model.addAttribute("thisActivity", activity);
-			return "redirect:city/new";
+			return "redirect:activity/new";
 
 		} else {
 			activityService.createActivity(activity);
-			return "redirect:/all/cities";
+			return "dashboard.jsp";
 		}
 
 	}

@@ -1,6 +1,7 @@
 package com.groupeight.citiesandactivities.controllers;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class CityController {
 			return "redirect:/logout";
 		}
 		model.addAttribute("allActivities", cityService.allCities());
-		return "allActivities.jsp";
+		return "ViewActivities.jsp";
 	}
 
 	@RequestMapping("city/{id}")
@@ -41,12 +42,11 @@ public class CityController {
 	}
 	
 	@RequestMapping("city/add")
-	private String newCity(@PathVariable("id") @ModelAttribute("thisCity") Model model, City city,
+	private String newCity(Model model, @ModelAttribute("city") City newCity,
 			HttpSession session) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
-		model.addAttribute("thisCity", city);
 
 		return "addCity.jsp";
 	}
@@ -78,17 +78,18 @@ public class CityController {
 	}
 
 	@PostMapping("city/new")
-	private String newcity(@ModelAttribute("thisCity") Model model, HttpSession session, BindingResult result,
-			City city) {
+	private String newcity(@Valid @ModelAttribute("city") City newCity, Model model, HttpSession session,
+			BindingResult result) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
 		if (result.hasErrors()) {
-			model.addAttribute("thisCity", city);
-			return "redirect:city/new";
+			System.out.print("something went wrong");
+			return "addCity.jsp";
 
 		} else {
-			cityService.createCity(city);
+			System.out.print("I am here");
+			cityService.createCity(newCity);
 			return "redirect:/all/cities";
 		}
 
