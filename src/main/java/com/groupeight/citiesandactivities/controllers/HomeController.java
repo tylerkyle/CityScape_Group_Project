@@ -26,28 +26,27 @@ public class HomeController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = { "/", "/home" })
+	@RequestMapping(value = { "/" })
 	public String home(Principal principal, Model model, HttpSession session) {
 
 		String username = principal.getName();
 		model.addAttribute("user", userService.findByUsername(username));
 		User user = userService.findByUsername(username);
-		
+
 		if (session.getAttribute("userId") == null) {
-			Integer thisUsersId = user.getId();
+			Long thisUsersId = user.getId();
 			session.setAttribute("userId", thisUsersId);
 
 		}
 
-		if (session.getAttribute("usersZipCode") == null) {
-			String thisUserszip = user.getZipcode();
-			session.setAttribute("usersZipCode", thisUserszip);
-
-		}
-
-		return "redirect:lease/all";
+		return "redirect:/home";
 	}
 
+	@GetMapping("/home")
+	public String homePage(){
+		return "home.jsp";
+	}
+	
 	@RequestMapping("/registration")
 	public String registerForm(@Valid @ModelAttribute("user") User user) {
 		return "registrationPage.jsp";
