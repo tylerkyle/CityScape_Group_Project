@@ -84,11 +84,8 @@ public class CityController {
 			return "redirect:/logout";
 		}
 		if (result.hasErrors()) {
-			System.out.print("something went wrong");
 			return "addCity.jsp";
-
 		} else {
-			System.out.print("I am here");
 			cityService.createCity(newCity);
 			return "redirect:/all/cities";
 		}
