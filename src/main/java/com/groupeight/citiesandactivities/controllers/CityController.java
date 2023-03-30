@@ -78,8 +78,10 @@ public class CityController {
 	}
 
 	@PostMapping("city/new")
-	private String newcity(@Valid @ModelAttribute("city") City newCity, Model model, HttpSession session,
+	private String newcity(@ModelAttribute("city") City newCity, Model model, HttpSession session,
 			BindingResult result) {
+		System.out.print("I made it here");
+		
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}

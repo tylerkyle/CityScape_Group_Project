@@ -110,7 +110,7 @@ public class ActivityController {
 	
 	// TODO: Need to discuss a better redirect solution after creating activity
 	@PostMapping("activity/create")
-	private String createNewActivity(@Valid @ModelAttribute("activity") Activity activity, HttpSession session,
+	private String createNewActivity(@ModelAttribute("activity") Activity activity, HttpSession session,
 			BindingResult result, Model model) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
