@@ -16,7 +16,7 @@
 			<a href="${pageContext.servletContext.contextPath}/home"><button class="menu-btn">Home</button></a>
 			<a href="${pageContext.servletContext.contextPath}/city/add"><button class="menu-btn">New City</button></a>
 			<a href="${pageContext.servletContext.contextPath}/activity/add"><button class="menu-btn">Add Activity</button></a>
-			<a href="${pageContext.servletContext.contextPath}/chatgpt"><button class="menu-btn">Need Recommendations?</button></a>
+			<a href="${pageContext.servletContext.contextPath}/chat"><button class="menu-btn">Need Recommendations?</button></a>
 		</div>
 		<div>
 			<a href="${pageContext.servletContext.contextPath}/logout"><button>Log Out</button></a>
