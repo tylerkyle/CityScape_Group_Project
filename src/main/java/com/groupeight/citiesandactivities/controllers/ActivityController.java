@@ -1,6 +1,7 @@
 package com.groupeight.citiesandactivities.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.groupeight.citiesandactivities.models.Activity;
+import com.groupeight.citiesandactivities.models.City;
 import com.groupeight.citiesandactivities.models.User;
 import com.groupeight.citiesandactivities.services.ActivityService;
 import com.groupeight.citiesandactivities.services.CityService;
@@ -121,6 +123,12 @@ public class ActivityController {
 
 		} else {
 			activityService.createActivity(activity);
+			
+			List<City> cities = cityService.allCities();
+			List<Activity> activities = activityService.allActivities();
+			model.addAttribute("cities", cities);
+			model.addAttribute("activites", activities);
+
 			return "dashboardPage.jsp";
 		}
 
