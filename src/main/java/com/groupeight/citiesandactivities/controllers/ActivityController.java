@@ -121,7 +121,7 @@ public class ActivityController {
 
 		} else {
 			activityService.createActivity(activity);
-			return "dashboard.jsp";
+			return "dashboardPage.jsp";
 		}
 
 	}
