@@ -22,12 +22,11 @@ import javax.validation.constraints.Size;
 @Table(name = "activities")
 public class Activity {
 
-	public Activity() {
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
+	/*@NotNull*/
 	private Long id;
 	@NotNull
 	@Size(min = 3, max = 100)
@@ -37,10 +36,14 @@ public class Activity {
 	private String price;
 	@NotNull
 	private String description;
-	@NotNull
+	/*@NotNull*/
 	private Date createdAt;
-	@NotNull
+	/*@NotNull*/
 	private Date updatedAt;
+	
+	
+	public Activity() {
+	}
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "city_id")
