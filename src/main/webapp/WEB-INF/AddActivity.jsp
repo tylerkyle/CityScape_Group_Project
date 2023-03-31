@@ -36,12 +36,12 @@
 			<form:form id="new-form" action="/activity/create" method="post" modelAttribute="activity">
 				<div class="div-form">
 					<form:label class="act-label" path="name"> Name:</form:label>
-					<form:input path="name"/>
+					<form:input type="text" path="name"/>
 					<form:errors path="name"/>
 				</div>
 				<div class="div-form">							
 					<form:label class="act-label" path="price">Price:</form:label>
-					<form:input path="price"/>
+					<form:input type="text" path="price"/>
 					<form:errors path="price"/>
 				</div>
 				<div class="div-form">
@@ -50,7 +50,10 @@
 					<form:errors path="description"/>
 				</div>
 				<div>
-					<input type="hidden" path="citi" value="${citi.id}"/>
+					<input type="hidden" path="user_id" value="${user.id}"/>
+					<input type="hidden" path="city_id" value="${city.id}"/>
+					<input type="hidden" path="createdAt" value="${activity.createdAt}"/>
+					<input type="hidden" path="updatedAt" value="${activity.updatedAt}"/>
 				</div>
 				<input type="submit" class="btn btn-primary" value="Add Activity"/>
 			</form:form>
